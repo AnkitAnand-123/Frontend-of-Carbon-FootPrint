@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Community Insights - CarbonTracker</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fcarbontrac6420back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.6"></script>
+</head>
+<body class="bg-background min-h-screen">
+    <!-- Navigation Header -->
+    <nav class="bg-surface shadow-sm border-b border-border-light sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <svg class="w-8 h-8 text-secondary mr-3" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2L13.09 8.26L22 9L13.09 9.74L12 16L10.91 9.74L2 9L10.91 8.26L12 2Z"/>
+                        <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                    <span class="text-xl font-bold text-text-primary">CarbonTracker</span>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="dashboard_homepage.html" class="text-text-secondary hover:text-primary transition-colors">Dashboard</a>
+                    <a href="activity_logging_interface.html" class="text-text-secondary hover:text-primary transition-colors">Log Activity</a>
+                    <a href="analytics_deep_dive.html" class="text-text-secondary hover:text-primary transition-colors">Analytics</a>
+                    <a href="activity_history_explorer.html" class="text-text-secondary hover:text-primary transition-colors">History</a>
+                    <a href="community_insights_comparisons.html" class="text-primary font-medium border-b-2 border-primary pb-1">Community</a>
+                    <a href="user_profile_goals_center.html" class="text-text-secondary hover:text-primary transition-colors">Profile</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden p-2 rounded-lg hover:bg-gray-100" onclick="toggleMobileMenu()">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Mobile Navigation -->
+            <div id="mobileMenu" class="md:hidden hidden pb-4">
+                <div class="flex flex-col space-y-2">
+                    <a href="dashboard_homepage.html" class="text-text-secondary hover:text-primary px-3 py-2 rounded-lg hover:bg-gray-50">Dashboard</a>
+                    <a href="activity_logging_interface.html" class="text-text-secondary hover:text-primary px-3 py-2 rounded-lg hover:bg-gray-50">Log Activity</a>
+                    <a href="analytics_deep_dive.html" class="text-text-secondary hover:text-primary px-3 py-2 rounded-lg hover:bg-gray-50">Analytics</a>
+                    <a href="activity_history_explorer.html" class="text-text-secondary hover:text-primary px-3 py-2 rounded-lg hover:bg-gray-50">History</a>
+                    <a href="community_insights_comparisons.html" class="text-primary font-medium px-3 py-2 rounded-lg bg-primary-50">Community</a>
+                    <a href="user_profile_goals_center.html" class="text-text-secondary hover:text-primary px-3 py-2 rounded-lg hover:bg-gray-50">Profile</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Header Section -->
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-text-primary mb-2">Community Impact 🌍</h1>
+            <p class="text-text-secondary">See how you're contributing to our collective environmental impact and discover insights from fellow eco-warriors.</p>
+        </div>
+
+        <!-- Community Stats Hero -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="card text-center">
+                <div class="w-16 h-16 bg-secondary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-8 h-8 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-bold font-mono text-text-primary mb-1">24,891</h3>
+                <p class="text-text-secondary text-sm">Active Community Members</p>
+                <p class="text-xs text-secondary mt-1">↑ 12% this month</p>
+            </div>
+
+            <div class="card text-center">
+                <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-bold font-mono text-text-primary mb-1">1.2M</h3>
+                <p class="text-text-secondary text-sm">kg CO₂ Saved Together</p>
+                <p class="text-xs text-secondary mt-1">Equivalent to 2,600 cars off roads</p>
+            </div>
+
+            <div class="card text-center">
+                <div class="w-16 h-16 bg-accent-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-8 h-8 text-accent-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/>
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-bold font-mono text-text-primary mb-1">54,000</h3>
+                <p class="text-text-secondary text-sm">Trees Planted Equivalent</p>
+                <p class="text-xs text-secondary mt-1">Based on collective impact</p>
+            </div>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <!-- Left Column: Comparisons & Rankings -->
+            <div class="lg:col-span-4 space-y-6">
+                <!-- Your Performance -->
+                <div class="card">
+                    <h3 class="text-lg font-semibold text-text-primary mb-4">Your Performance</h3>
+                    <div class="space-y-4">
+                        <div class="p-4 bg-secondary-50 rounded-lg border border-secondary-200">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-sm font-medium text-text-primary">vs Similar Users</span>
+                                <span class="text-sm font-bold text-secondary">Top 25%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2 mb-2">
+                                <div class="bg-secondary h-2 rounded-full" style="width: 75%"></div>
+                            </div>
+                            <p class="text-xs text-text-secondary">22% better than users in your demographic</p>
+                        </div>
+
+                        <div class="p-4 bg-primary-50 rounded-lg border border-primary-200">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-sm font-medium text-text-primary">vs Global Average</span>
+                                <span class="text-sm font-bold text-primary">35% Better</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2 mb-2">
+                                <div class="bg-primary h-2 rounded-full" style="width: 65%"></div>
+                            </div>
+                            <p class="text-xs text-text-secondary">Significantly below global carbon footprint</p>
+                        </div>
+
+                        <div class="p-4 bg-accent-50 rounded-lg border border-accent-200">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-sm font-medium text-text-primary">Community Rank</span>
+                                <span class="text-sm font-bold text-accent">#3,247</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2 mb-2">
+                                <div class="bg-accent h-2 rounded-full" style="width: 87%"></div>
+                            </div>
+                            <p class="text-xs text-text-secondary">Out of 24,891 active members</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Current Challenges -->
+                <div class="card">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-text-primary">Active Challenges</h3>
+                        <button class="text-primary text-sm hover:underline">Join More</button>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="p-4 bg-gradient-to-r from-secondary-50 to-secondary-100 rounded-lg border border-secondary-200">
+                            <div class="flex items-center justify-between mb-2">
+                                <h4 class="font-medium text-text-primary">Green Commute Week</h4>
+                                <span class="text-xs bg-secondary text-white px-2 py-1 rounded-full">Active</span>
+                            </div>
+                            <p class="text-sm text-text-secondary mb-3">Reduce transport emissions by using eco-friendly commute options</p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <svg class="w-4 h-4 text-secondary mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                                    </svg>
+                                    <span class="text-xs text-text-secondary">8,432 participants</span>
+                                </div>
+                                <span class="text-xs text-text-secondary">3 days left</span>
+                            </div>
+                        </div>
+
+                        <div class="p-4 bg-gradient-to-r from-accent-50 to-accent-100 rounded-lg border border-accent-200">
+                            <div class="flex items-center justify-between mb-2">
+                                <h4 class="font-medium text-text-primary">Plant-Based August</h4>
+                                <span class="text-xs bg-accent text-white px-2 py-1 rounded-full">Joined</span>
+                            </div>
+                            <p class="text-sm text-text-secondary mb-3">Try plant-based meals to reduce food carbon footprint</p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <svg class="w-4 h-4 text-accent mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                                    </svg>
+                                    <span class="text-xs text-text-secondary">12,156 participants</span>
+                                </div>
+                                <span class="text-xs text-text-secondary">27 days left</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Leaderboard -->
+                <div class="card">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-text-primary">This Month's Champions</h3>
+                        <div class="flex space-x-2">
+                            <button class="px-3 py-1 text-sm bg-primary text-white rounded-lg">Reduction</button>
+                            <button class="px-3 py-1 text-sm text-text-secondary hover:bg-gray-100 rounded-lg">Consistency</button>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between p-3 bg-gradient-to-r from-accent-50 to-accent-100 rounded-lg">
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 bg-accent text-white rounded-full flex items-center justify-center mr-3 text-sm font-bold">1</div>
+                                <div>
+                                    <p class="text-sm font-medium text-text-primary">EcoWarrior2024</p>
+                                    <p class="text-xs text-text-secondary">45% reduction this month</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <svg class="w-5 h-5 text-accent mx-auto" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 bg-gray-400 text-white rounded-full flex items-center justify-center mr-3 text-sm font-bold">2</div>
+                                <div>
+                                    <p class="text-sm font-medium text-text-primary">GreenThumb_Alex</p>
+                                    <p class="text-xs text-text-secondary">38% reduction this month</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <svg class="w-5 h-5 text-gray-400 mx-auto" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 bg-gray-400 text-white rounded-full flex items-center justify-center mr-3 text-sm font-bold">3</div>
+                                <div>
+                                    <p class="text-sm font-medium text-text-primary">SustainableSarah</p>
+                                    <p class="text-xs text-text-secondary">32% reduction this month</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <svg class="w-5 h-5 text-gray-400 mx-auto" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div class="text-center pt-2">
+                            <p class="text-xs text-text-secondary">You're ranked <span class="font-medium text-primary">#47</span> in reduction category</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Center Column: Community Trends & Impact Map -->
+            <div class="lg:col-span-8 space-y-6">
+                <!-- Community Impact Visualization -->
+                <div class="card">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-text-primary">Global Community Impact</h3>
+                        <div class="flex space-x-2">
+                            <button class="px-3 py-1 text-sm bg-primary text-white rounded-lg">Real-time</button>
+                            <button class="px-3 py-1 text-sm text-text-secondary hover:bg-gray-100 rounded-lg">Monthly</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Impact Map Placeholder -->
+                    <div class="relative h-64 bg-gradient-to-br from-primary-50 to-secondary-50 rounded-lg overflow-hidden mb-4">
+                        <img src="https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Global impact visualization" class="w-full h-full object-cover opacity-20" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                        
+                        <!-- Interactive Hotspots -->
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="text-center">
+                                <div class="w-24 h-24 bg-secondary-100 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
+                                    <svg class="w-12 h-12 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                </div>
+                                <p class="text-lg font-bold text-text-primary">Live Community Impact</p>
+                                <p class="text-sm text-text-secondary">Real-time CO₂ savings visualization</p>
+                            </div>
+                        </div>
+
+                        <!-- Regional Impact Indicators -->
+                        <div class="absolute top-4 left-4 bg-white rounded-lg p-2 shadow-sm">
+                            <div class="flex items-center">
+                                <div class="w-3 h-3 bg-secondary rounded-full mr-2"></div>
+                                <span class="text-xs text-text-secondary">North America: 456k kg saved</span>
+                            </div>
+                        </div>
+                        <div class="absolute top-4 right-4 bg-white rounded-lg p-2 shadow-sm">
+                            <div class="flex items-center">
+                                <div class="w-3 h-3 bg-primary rounded-full mr-2"></div>
+                                <span class="text-xs text-text-secondary">Europe: 389k kg saved</span>
+                            </div>
+                        </div>
+                        <div class="absolute bottom-4 left-4 bg-white rounded-lg p-2 shadow-sm">
+                            <div class="flex items-center">
+                                <div class="w-3 h-3 bg-accent rounded-full mr-2"></div>
+                                <span class="text-xs text-text-secondary">Asia: 312k kg saved</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Impact Statistics -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="text-center p-3 bg-secondary-50 rounded-lg">
+                            <p class="text-lg font-bold font-mono text-secondary">2,847</p>
+                            <p class="text-xs text-text-secondary">kg CO₂ saved today</p>
+                        </div>
+                        <div class="text-center p-3 bg-primary-50 rounded-lg">
+                            <p class="text-lg font-bold font-mono text-primary">156</p>
+                            <p class="text-xs text-text-secondary">cities participating</p>
+                        </div>
+                        <div class="text-center p-3 bg-accent-50 rounded-lg">
+                            <p class="text-lg font-bold font-mono text-accent">89%</p>
+                            <p class="text-xs text-text-secondary">weekly active users</p>
+                        </div>
+                        <div class="text-center p-3 bg-gray-50 rounded-lg">
+                            <p class="text-lg font-bold font-mono text-text-primary">4.2</p>
+                            <p class="text-xs text-text-secondary">avg daily logs</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Community Trends -->
+                <div class="card">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-text-primary">Community Trends</h3>
+                        <div class="flex space-x-2">
+                            <button class="px-3 py-1 text-sm bg-primary text-white rounded-lg">30 days</button>
+                            <button class="px-3 py-1 text-sm text-text-secondary hover:bg-gray-100 rounded-lg">90 days</button>
+                        </div>
+                    </div>
+                    <div class="h-64">
+                        <canvas id="communityTrendChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Best Practices Sharing -->
+                <div class="card">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-text-primary">Community Best Practices</h3>
+                        <button class="text-primary text-sm hover:underline">Share Your Tip</button>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="p-4 bg-secondary-50 rounded-lg border border-secondary-200">
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 bg-secondary-100 rounded-full flex items-center justify-center mr-3 mt-1">
+                                    <svg class="w-5 h-5 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                                    </svg>
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-medium text-text-primary mb-1">Smart Thermostat Scheduling</h4>
+                                    <p class="text-sm text-text-secondary mb-2">"I programmed my thermostat to reduce heating/cooling when I'm not home. Saved 25% on energy usage!"</p>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-xs text-text-secondary">by EcoEnthusiast</span>
+                                        <div class="flex items-center">
+                                            <svg class="w-4 h-4 text-secondary mr-1" fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                            </svg>
+                                            <span class="text-xs text-text-secondary">247</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 bg-primary-50 rounded-lg border border-primary-200">
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center mr-3 mt-1">
+                                    <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                    </svg>
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-medium text-text-primary mb-1">Bike Commute Challenge</h4>
+                                    <p class="text-sm text-text-secondary mb-2">"Started biking to work 3x/week. Not only reduced emissions but improved my health too!"</p>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-xs text-text-secondary">by CyclingChampion</span>
+                                        <div class="flex items-center">
+                                            <svg class="w-4 h-4 text-primary mr-1" fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                            </svg>
+                                            <span class="text-xs text-text-secondary">189</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 bg-accent-50 rounded-lg border border-accent-200">
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 bg-accent-100 rounded-full flex items-center justify-center mr-3 mt-1">
+                                    <svg class="w-5 h-5 text-accent-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/>
+                                    </svg>
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-medium text-text-primary mb-1">Meal Prep Sundays</h4>
+                                    <p class="text-sm text-text-secondary mb-2">"Batch cooking plant-based meals reduces food waste and makes healthy eating easier throughout the week."</p>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-xs text-text-secondary">by PlantBasedPro</span>
+                                        <div class="flex items-center">
+                                            <svg class="w-4 h-4 text-accent mr-1" fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                            </svg>
+                                            <span class="text-xs text-text-secondary">156</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 bg-gray-50 rounded-lg border border-gray-200">
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mr-3 mt-1">
+                                    <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                                    </svg>
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-medium text-text-primary mb-1">Reusable Everything</h4>
+                                    <p class="text-sm text-text-secondary mb-2">"Invested in quality reusable bags, bottles, and containers. Initial cost paid off in 2 months!"</p>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-xs text-text-secondary">by ZeroWasteWarrior</span>
+                                        <div class="flex items-center">
+                                            <svg class="w-4 h-4 text-gray-600 mr-1" fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                            </svg>
+                                            <span class="text-xs text-text-secondary">203</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Discussion Forums Preview -->
+                <div class="card">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-text-primary">Community Discussions</h3>
+                        <button class="text-primary text-sm hover:underline">View All Forums</button>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex items-start p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer">
+                            <div class="w-10 h-10 bg-secondary-100 rounded-full flex items-center justify-center mr-3 mt-1">
+                                <span class="text-sm font-medium text-secondary-600">EW</span>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="font-medium text-text-primary mb-1">Best electric vehicle charging strategies?</h4>
+                                <p class="text-sm text-text-secondary mb-2">Looking for advice on optimizing EV charging to minimize grid impact...</p>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-4">
+                                        <span class="text-xs text-text-secondary">12 replies</span>
+                                        <span class="text-xs text-text-secondary">2 hours ago</span>
+                                    </div>
+                                    <span class="text-xs bg-secondary-100 text-secondary-700 px-2 py-1 rounded-full">Transportation</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer">
+                            <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center mr-3 mt-1">
+                                <span class="text-sm font-medium text-primary-600">GH</span>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="font-medium text-text-primary mb-1">Home energy audit results - what to prioritize?</h4>
+                                <p class="text-sm text-text-secondary mb-2">Just got my energy audit back and feeling overwhelmed by all the recommendations...</p>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-4">
+                                        <span class="text-xs text-text-secondary">8 replies</span>
+                                        <span class="text-xs text-text-secondary">5 hours ago</span>
+                                    </div>
+                                    <span class="text-xs bg-primary-100 text-primary-700 px-2 py-1 rounded-full">Energy</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Floating Action Button -->
+    <div class="fixed bottom-6 right-6 md:hidden">
+        <button class="w-14 h-14 bg-secondary text-white rounded-full shadow-lg flex items-center justify-center hover:bg-secondary-600 transition-colors">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+            </svg>
+        </button>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Initialize Community Trend Chart
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('communityTrendChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8'],
+                    datasets: [
+                        {
+                            label: 'Average Daily CO₂ (kg)',
+                            data: [8.2, 7.9, 7.6, 7.3, 7.1, 6.8, 6.5, 6.2],
+                            borderColor: '#2563EB',
+                            backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                            borderWidth: 3,
+                            fill: true,
+                            tension: 0.4,
+                            pointBackgroundColor: '#2563EB',
+                            pointBorderColor: '#ffffff',
+                            pointBorderWidth: 2,
+                            pointRadius: 4,
+                            pointHoverRadius: 6
+                        },
+                        {
+                            label: 'Community Goal',
+                            data: [8.0, 7.8, 7.5, 7.2, 7.0, 6.7, 6.4, 6.0],
+                            borderColor: '#059669',
+                            backgroundColor: 'rgba(5, 150, 105, 0.1)',
+                            borderWidth: 2,
+                            borderDash: [5, 5],
+                            fill: false,
+                            tension: 0.4,
+                            pointBackgroundColor: '#059669',
+                            pointBorderColor: '#ffffff',
+                            pointBorderWidth: 2,
+                            pointRadius: 3,
+                            pointHoverRadius: 5
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            labels: {
+                                usePointStyle: true,
+                                padding: 20,
+                                font: {
+                                    size: 12
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: '#6B7280',
+                                font: {
+                                    size: 12
+                                }
+                            }
+                        },
+                        y: {
+                            beginAtZero: false,
+                            min: 5.5,
+                            max: 8.5,
+                            grid: {
+                                color: '#F3F4F6'
+                            },
+                            ticks: {
+                                color: '#6B7280',
+                                font: {
+                                    size: 12
+                                },
+                                callback: function(value) {
+                                    return value + ' kg';
+                                }
+                            }
+                        }
+                    },
+                    interaction: {
+                        intersect: false,
+                        mode: 'index'
+                    }
+                }
+            });
+        });
+
+        // Animate progress bars on load
+        window.addEventListener('load', function() {
+            const progressBars = document.querySelectorAll('[style*="width:"]');
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.transition = 'width 1s ease-out';
+                    bar.style.width = width;
+                }, 500);
+            });
+        });
+
+        // Add click handlers for interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Challenge participation
+            const challengeCards = document.querySelectorAll('[class*="gradient-to-r"]');
+            challengeCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    // Handle challenge interaction
+                    console.log('Challenge clicked');
+                });
+            });
+
+            // Best practice likes
+            const likeButtons = document.querySelectorAll('svg[class*="text-secondary"], svg[class*="text-primary"], svg[class*="text-accent"]');
+            likeButtons.forEach(button => {
+                if (button.closest('.flex.items-center')) {
+                    button.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        // Handle like interaction
+                        const countSpan = button.nextElementSibling;
+                        if (countSpan) {
+                            const currentCount = parseInt(countSpan.textContent);
+                            countSpan.textContent = currentCount + 1;
+                            button.style.transform = 'scale(1.2)';
+                            setTimeout(() => {
+                                button.style.transform = 'scale(1)';
+                            }, 200);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>

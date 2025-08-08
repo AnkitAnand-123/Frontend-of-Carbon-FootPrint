@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Log Activity - CarbonTracker</title>
+    <link rel="stylesheet" href="../css/main.css" />
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fcarbontrac6420back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.6"></script>
+</head>
+<body class="bg-background min-h-screen">
+    <!-- Navigation Header -->
+    <nav class="bg-surface shadow-sm border-b border-border-light sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <svg class="w-8 h-8 text-secondary mr-3" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2L13.09 8.26L22 9L13.09 9.74L12 16L10.91 9.74L2 9L10.91 8.26L12 2Z"/>
+                        <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                    <span class="text-xl font-bold text-text-primary">CarbonTracker</span>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="dashboard_homepage.html" class="text-text-secondary hover:text-primary transition-colors">Dashboard</a>
+                    <a href="activity_logging_interface.html" class="text-primary font-medium border-b-2 border-primary pb-1">Log Activity</a>
+                    <a href="analytics_deep_dive.html" class="text-text-secondary hover:text-primary transition-colors">Analytics</a>
+                    <a href="activity_history_explorer.html" class="text-text-secondary hover:text-primary transition-colors">History</a>
+                    <a href="community_insights_comparisons.html" class="text-text-secondary hover:text-primary transition-colors">Community</a>
+                    <a href="user_profile_goals_center.html" class="text-text-secondary hover:text-primary transition-colors">Profile</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden p-2 rounded-lg hover:bg-gray-100" onclick="toggleMobileMenu()">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Mobile Navigation -->
+            <div id="mobileMenu" class="md:hidden hidden pb-4">
+                <div class="flex flex-col space-y-2">
+                    <a href="dashboard_homepage.html" class="text-text-secondary hover:text-primary px-3 py-2 rounded-lg hover:bg-gray-50">Dashboard</a>
+                    <a href="activity_logging_interface.html" class="text-primary font-medium px-3 py-2 rounded-lg bg-primary-50">Log Activity</a>
+                    <a href="analytics_deep_dive.html" class="text-text-secondary hover:text-primary px-3 py-2 rounded-lg hover:bg-gray-50">Analytics</a>
+                    <a href="activity_history_explorer.html" class="text-text-secondary hover:text-primary px-3 py-2 rounded-lg hover:bg-gray-50">History</a>
+                    <a href="community_insights_comparisons.html" class="text-text-secondary hover:text-primary px-3 py-2 rounded-lg hover:bg-gray-50">Community</a>
+                    <a href="user_profile_goals_center.html" class="text-text-secondary hover:text-primary px-3 py-2 rounded-lg hover:bg-gray-50">Profile</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Header Section -->
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-text-primary mb-2">Log Your Activities 📝</h1>
+            <p class="text-text-secondary">Track your daily carbon footprint by logging your activities. Every entry helps build a clearer picture of your environmental impact.</p>
+        </div>
+
+        <!-- Quick Stats Bar -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+            <div class="card text-center">
+                <div class="text-2xl font-bold font-mono text-text-primary">2.4</div>
+                <div class="text-sm text-text-secondary">Today's CO₂ (kg)</div>
+            </div>
+            <div class="card text-center">
+                <div class="text-2xl font-bold font-mono text-secondary">5</div>
+                <div class="text-sm text-text-secondary">Activities logged</div>
+            </div>
+            <div class="card text-center">
+                <div class="text-2xl font-bold font-mono text-accent">12</div>
+                <div class="text-sm text-text-secondary">Day streak</div>
+            </div>
+            <div class="card text-center">
+                <div class="text-2xl font-bold font-mono text-primary">75%</div>
+                <div class="text-sm text-text-secondary">Weekly goal</div>
+            </div>
+        </div>
+
+        <!-- Category Selection Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <!-- Transportation Card -->
+            <div class="card hover:shadow-md transition-all duration-300 cursor-pointer border-2 border-transparent hover:border-primary-200" onclick="openCategoryModal('transportation')">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-text-primary mb-2">Transportation</h3>
+                    <p class="text-sm text-text-secondary mb-4">Cars, public transit, flights, walking</p>
+                    <div class="text-xs text-primary font-medium">Today: 1.6 kg CO₂</div>
+                </div>
+            </div>
+
+            <!-- Energy Card -->
+            <div class="card hover:shadow-md transition-all duration-300 cursor-pointer border-2 border-transparent hover:border-secondary-200" onclick="openCategoryModal('energy')">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-secondary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-text-primary mb-2">Energy</h3>
+                    <p class="text-sm text-text-secondary mb-4">Electricity, heating, cooling</p>
+                    <div class="text-xs text-secondary font-medium">Today: 0.5 kg CO₂</div>
+                </div>
+            </div>
+
+            <!-- Food Card -->
+            <div class="card hover:shadow-md transition-all duration-300 cursor-pointer border-2 border-transparent hover:border-accent-200" onclick="openCategoryModal('food')">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-accent-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-accent-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-text-primary mb-2">Food</h3>
+                    <p class="text-sm text-text-secondary mb-4">Meals, snacks, beverages</p>
+                    <div class="text-xs text-accent font-medium">Today: 0.2 kg CO₂</div>
+                </div>
+            </div>
+
+            <!-- Shopping Card -->
+            <div class="card hover:shadow-md transition-all duration-300 cursor-pointer border-2 border-transparent hover:border-gray-300" onclick="openCategoryModal('shopping')">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-text-primary mb-2">Shopping</h3>
+                    <p class="text-sm text-text-secondary mb-4">Purchases, deliveries, returns</p>
+                    <div class="text-xs text-gray-600 font-medium">Today: 0.1 kg CO₂</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Activities -->
+        <div class="card mb-8">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xl font-semibold text-text-primary">Recent Activities</h2>
+                <a href="activity_history_explorer.html" class="text-primary text-sm hover:underline">View all history</a>
+            </div>
+            <div class="space-y-4">
+                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center mr-4">
+                            <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="font-medium text-text-primary">Car commute to work</p>
+                            <p class="text-sm text-text-secondary">15 miles • 30 minutes • 2 hours ago</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <p class="font-mono font-medium text-text-primary">3.2 kg CO₂</p>
+                        <p class="text-xs text-text-secondary">≈ 8 miles of driving</p>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-secondary-100 rounded-full flex items-center justify-center mr-4">
+                            <svg class="w-5 h-5 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="font-medium text-text-primary">Home electricity usage</p>
+                            <p class="text-sm text-text-secondary">12 kWh • Morning peak • 4 hours ago</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <p class="font-mono font-medium text-text-primary">1.8 kg CO₂</p>
+                        <p class="text-xs text-text-secondary">≈ 4 miles of driving</p>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-accent-100 rounded-full flex items-center justify-center mr-4">
+                            <svg class="w-5 h-5 text-accent-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="font-medium text-text-primary">Lunch - Fried Rice</p>
+                            <p class="text-sm text-text-secondary">Restaurant meal • 6 hours ago</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <p class="font-mono font-medium text-text-primary">2.1 kg CO₂</p>
+                        <p class="text-xs text-text-secondary">≈ 5 miles of driving</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Tips -->
+        <div class="card">
+            <h3 class="text-lg font-semibold text-text-primary mb-4">💡 Logging Tips</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="flex items-start">
+                    <div class="w-6 h-6 bg-primary-100 rounded-full flex items-center justify-center mr-3 mt-0.5">
+                        <svg class="w-3 h-3 text-primary-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-text-primary">Enable GPS for automatic distance tracking</p>
+                        <p class="text-xs text-text-secondary">More accurate transportation logging</p>
+                    </div>
+                </div>
+                <div class="flex items-start">
+                    <div class="w-6 h-6 bg-secondary-100 rounded-full flex items-center justify-center mr-3 mt-0.5">
+                        <svg class="w-3 h-3 text-secondary-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-text-primary">Upload utility bills for precise energy data</p>
+                        <p class="text-xs text-text-secondary">OCR automatically extracts usage</p>
+                    </div>
+                </div>
+                <div class="flex items-start">
+                    <div class="w-6 h-6 bg-accent-100 rounded-full flex items-center justify-center mr-3 mt-0.5">
+                        <svg class="w-3 h-3 text-accent-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-text-primary">Use barcode scanner for packaged foods</p>
+                        <p class="text-xs text-text-secondary">Instant carbon footprint lookup</p>
+                    </div>
+                </div>
+                <div class="flex items-start">
+                    <div class="w-6 h-6 bg-gray-100 rounded-full flex items-center justify-center mr-3 mt-0.5">
+                        <svg class="w-3 h-3 text-gray-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-text-primary">Log activities offline, sync later</p>
+                        <p class="text-xs text-text-secondary">Never miss tracking your impact</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Category Modal -->
+    <div id="categoryModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
+        <div class="bg-surface rounded-lg shadow-lg max-w-2xl w-full max-h-screen overflow-y-auto">
+            <div class="p-6">
+                <!-- Modal Header -->
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center">
+                        <div id="modalIcon" class="w-12 h-12 rounded-full flex items-center justify-center mr-4">
+                            <!-- Icon will be inserted here -->
+                        </div>
+                        <div>
+                            <h2 id="modalTitle" class="text-xl font-semibold text-text-primary">Log Activity</h2>
+                            <p id="modalSubtitle" class="text-sm text-text-secondary">Track your carbon footprint</p>
+                        </div>
+                    </div>
+                    <button onclick="closeCategoryModal()" class="p-2 hover:bg-gray-100 rounded-lg">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Modal Content -->
+                <div id="modalContent">
+                    <!-- Content will be dynamically inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Floating Action Button -->
+    <div class="fixed bottom-6 right-6 md:hidden">
+        <button onclick="showQuickLog()" class="w-14 h-14 bg-accent text-white rounded-full shadow-lg flex items-center justify-center hover:bg-accent-600 transition-colors">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+            </svg>
+        </button>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Category modal functions
+        function openCategoryModal(category) {
+            const modal = document.getElementById('categoryModal');
+            const modalIcon = document.getElementById('modalIcon');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalSubtitle = document.getElementById('modalSubtitle');
+            const modalContent = document.getElementById('modalContent');
+
+            // Configure modal based on category
+            const categoryConfig = {
+                transportation: {
+                    title: 'Transportation',
+                    subtitle: 'Log your travel activities',
+                    icon: '<svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>',
+                    iconBg: 'bg-primary-100',
+                    content: getTransportationForm()
+                },
+                energy: {
+                    title: 'Energy',
+                    subtitle: 'Track your energy consumption',
+                    icon: '<svg class="w-6 h-6 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>',
+                    iconBg: 'bg-secondary-100',
+                    content: getEnergyForm()
+                },
+                food: {
+                    title: 'Food',
+                    subtitle: 'Log your meals and snacks',
+                    icon: '<svg class="w-6 h-6 text-accent-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/></svg>',
+                    iconBg: 'bg-accent-100',
+                    content: getFoodForm()
+                },
+                shopping: {
+                    title: 'Shopping',
+                    subtitle: 'Track your purchases',
+                    icon: '<svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>',
+                    iconBg: 'bg-gray-100',
+                    content: getShoppingForm()
+                }
+            };
+
+            const config = categoryConfig[category];
+            modalIcon.className = `w-12 h-12 ${config.iconBg} rounded-full flex items-center justify-center`;
+            modalIcon.innerHTML = config.icon;
+            modalTitle.textContent = config.title;
+            modalSubtitle.textContent = config.subtitle;
+            modalContent.innerHTML = config.content;
+
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCategoryModal() {
+            const modal = document.getElementById('categoryModal');
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        function getTransportationForm() {
+            return `
+                <form class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-text-primary mb-2">Transportation Mode</label>
+                            <select class="input-field">
+                                <option>Car (gasoline)</option>
+                                <option>Car (electric)</option>
+                                <option>Bus</option>
+                                <option>Train</option>
+                                <option>Subway</option>
+                                <option>Bicycle</option>
+                                <option>Walking</option>
+                                <option>Flight (domestic)</option>
+                                <option>Flight (international)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-text-primary mb-2">Distance</label>
+                            <div class="flex">
+                                <input type="number" class="input-field rounded-r-none" placeholder="0" step="0.1">
+                                <select class="input-field rounded-l-none border-l-0 w-20">
+                                    <option>miles</option>
+                                    <option>km</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="p-4 bg-primary-50 rounded-lg border border-primary-200">
+                        <div class="flex items-center mb-2">
+                            <svg class="w-5 h-5 text-primary-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            </svg>
+                            <span class="text-sm font-medium text-primary-700">GPS Auto-Detection</span>
+                        </div>
+                        <p class="text-xs text-primary-600">Enable location services to automatically detect your route and calculate precise distances.</p>
+                        <button type="button" class="mt-2 text-xs text-primary-600 hover:text-primary-700 underline">Enable GPS tracking</button>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-text-primary mb-2">Notes (optional)</label>
+                        <textarea class="input-field" rows="3" placeholder="Add any additional details..."></textarea>
+                    </div>
+
+                    <div class="p-4 bg-gray-50 rounded-lg">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-text-secondary">Estimated CO₂ Impact:</span>
+                            <span class="text-lg font-mono font-bold text-text-primary">2.4 kg</span>
+                        </div>
+                        <p class="text-xs text-text-secondary mt-1">≈ Equivalent to 6 miles of average car driving</p>
+                    </div>
+
+                    <div class="flex space-x-3">
+                        <button type="submit" class="btn-primary flex-1">Log Activity</button>
+                        <button type="button" onclick="closeCategoryModal()" class="px-4 py-2 border border-border rounded-lg text-text-secondary hover:bg-gray-50">Cancel</button>
+                    </div>
+                </form>
+            `;
+        }
+
+        function getEnergyForm() {
+            return `
+                <form class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-text-primary mb-2">Energy Type</label>
+                            <select class="input-field">
+                                <option>Electricity</option>
+                                <option>Natural Gas</option>
+                                <option>Heating Oil</option>
+                                <option>Propane</option>
+                                <option>Solar (self-generated)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-text-primary mb-2">Usage Amount</label>
+                            <div class="flex">
+                                <input type="number" class="input-field rounded-r-none" placeholder="0" step="0.1">
+                                <select class="input-field rounded-l-none border-l-0 w-20">
+                                    <option>kWh</option>
+                                    <option>therms</option>
+                                    <option>gallons</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-secondary-50 rounded-lg border border-secondary-200">
+                        <div class="flex items-center mb-2">
+                            <svg class="w-5 h-5 text-secondary-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            </svg>
+                            <span class="text-sm font-medium text-secondary-700">Bill Photo Upload</span>
+                        </div>
+                        <p class="text-xs text-secondary-600">Upload a photo of your utility bill for automatic data extraction using OCR technology.</p>
+                        <button type="button" class="mt-2 text-xs text-secondary-600 hover:text-secondary-700 underline">Upload bill photo</button>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-text-primary mb-2">Time Period</label>
+                        <select class="input-field">
+                            <option>Daily usage</option>
+                            <option>Weekly usage</option>
+                            <option>Monthly bill</option>
+                            <option>Custom period</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-text-primary mb-2">Notes (optional)</label>
+                        <textarea class="input-field" rows="3" placeholder="Add any additional details..."></textarea>
+                    </div>
+
+                    <div class="p-4 bg-gray-50 rounded-lg">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-text-secondary">Estimated CO₂ Impact:</span>
+                            <span class="text-lg font-mono font-bold text-text-primary">1.8 kg</span>
+                        </div>
+                        <p class="text-xs text-text-secondary mt-1">≈ Equivalent to 4.5 miles of average car driving</p>
+                    </div>
+
+                    <div class="flex space-x-3">
+                        <button type="submit" class="btn-secondary flex-1">Log Activity</button>
+                        <button type="button" onclick="closeCategoryModal()" class="px-4 py-2 border border-border rounded-lg text-text-secondary hover:bg-gray-50">Cancel</button>
+                    </div>
+                </form>
+            `;
+        }
+
+        function getFoodForm() {
+            return `
+                <form class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-text-primary mb-2">Meal Type</label>
+                            <select class="input-field">
+                                <option>Breakfast</option>
+                                <option>Lunch</option>
+                                <option>Dinner</option>
+                                <option>Snack</option>
+                                <option>Beverage</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-text-primary mb-2">Food Category</label>
+                            <select class="input-field">
+                                <option>Meat (beef)</option>
+                                <option>Meat (pork)</option>
+                                <option>Meat (chicken)</option>
+                                <option>Fish/Seafood</option>
+                                <option>Dairy</option>
+                                <option>Vegetables</option>
+                                <option>Grains</option>
+                                <option>Processed foods</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-accent-50 rounded-lg border border-accent-200">
+                        <div class="flex items-center mb-2">
+                            <svg class="w-5 h-5 text-accent-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V6a1 1 0 00-1-1H5a1 1 0 00-1 1v1a1 1 0 001 1z"/>
+                            </svg>
+                            <span class="text-sm font-medium text-accent-700">Barcode Scanner</span>
+                        </div>
+                        <p class="text-xs text-accent-600">Scan packaged food barcodes for instant carbon footprint lookup from our comprehensive database.</p>
+                        <button type="button" class="mt-2 text-xs text-accent-600 hover:text-accent-700 underline">Open barcode scanner</button>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-text-primary mb-2">Portion Size</label>
+                        <div class="grid grid-cols-3 gap-2">
+                            <button type="button" class="p-3 border border-border rounded-lg text-center hover:bg-gray-50 focus:ring-2 focus:ring-accent-500">
+                                <div class="text-sm font-medium">Small</div>
+                                <div class="text-xs text-text-secondary">~100g</div>
+                            </button>
+                            <button type="button" class="p-3 border border-accent-300 bg-accent-50 rounded-lg text-center">
+                                <div class="text-sm font-medium text-accent-700">Medium</div>
+                                <div class="text-xs text-accent-600">~200g</div>
+                            </button>
+                            <button type="button" class="p-3 border border-border rounded-lg text-center hover:bg-gray-50 focus:ring-2 focus:ring-accent-500">
+                                <div class="text-sm font-medium">Large</div>
+                                <div class="text-xs text-text-secondary">~300g</div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-text-primary mb-2">Food Source</label>
+                        <select class="input-field">
+                            <option>Home cooked</option>
+                            <option>Restaurant</option>
+                            <option>Fast food</option>
+                            <option>Takeout/Delivery</option>
+                            <option>Packaged/Processed</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-text-primary mb-2">Notes (optional)</label>
+                        <textarea class="input-field" rows="3" placeholder="Ingredients, preparation method, etc..."></textarea>
+                    </div>
+
+                    <div class="p-4 bg-gray-50 rounded-lg">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-text-secondary">Estimated CO₂ Impact:</span>
+                            <span class="text-lg font-mono font-bold text-text-primary">2.1 kg</span>
+                        </div>
+                        <p class="text-xs text-text-secondary mt-1">≈ Equivalent to 5 miles of average car driving</p>
+                    </div>
+
+                    <div class="flex space-x-3">
+                        <button type="submit" class="bg-accent text-white font-semibold py-2 px-4 rounded-lg hover:bg-accent-600 flex-1">Log Activity</button>
+                        <button type="button" onclick="closeCategoryModal()" class="px-4 py-2 border border-border rounded-lg text-text-secondary hover:bg-gray-50">Cancel</button>
+                    </div>
+                </form>
+            `;
+        }
+
+        function getShoppingForm() {
+            return `
+                <form class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-text-primary mb-2">Purchase Type</label>
+                            <select class="input-field">
+                                <option>Clothing</option>
+                                <option>Electronics</option>
+                                <option>Home goods</option>
+                                <option>Personal care</option>
+                                <option>Books/Media</option>
+                                <option>Groceries</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-text-primary mb-2">Purchase Method</label>
+                            <select class="input-field">
+                                <option>Online (delivery)</option>
+                                <option>In-store</option>
+                                <option>Curbside pickup</option>
+                                <option>Second-hand</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-text-primary mb-2">Item Description</label>
+                        <input type="text" class="input-field" placeholder="e.g., Cotton t-shirt, Smartphone, etc.">
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-text-primary mb-2">Quantity</label>
+                            <input type="number" class="input-field" placeholder="1" min="1">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-text-primary mb-2">Price (optional)</label>
+                            <div class="flex">
+                                <span class="inline-flex items-center px-3 rounded-l-lg border border-r-0 border-border bg-gray-50 text-text-secondary">$</span>
+                                <input type="number" class="input-field rounded-l-none" placeholder="0.00" step="0.01">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-gray-100 rounded-lg border border-gray-200">
+                        <div class="flex items-center mb-2">
+                            <svg class="w-5 h-5 text-gray-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V6a1 1 0 00-1-1H5a1 1 0 00-1 1v1a1 1 0 001 1z"/>
+                            </svg>
+                            <span class="text-sm font-medium text-gray-700">Barcode Scanner</span>
+                        </div>
+                        <p class="text-xs text-gray-600">Scan product barcodes for brand-specific carbon footprint calculations.</p>
+                        <button type="button" class="mt-2 text-xs text-gray-600 hover:text-gray-700 underline">Open barcode scanner</button>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-text-primary mb-2">Delivery Distance (if applicable)</label>
+                        <div class="flex">
+                            <input type="number" class="input-field rounded-r-none" placeholder="0" step="0.1">
+                            <select class="input-field rounded-l-none border-l-0 w-20">
+                                <option>miles</option>
+                                <option>km</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-text-primary mb-2">Notes (optional)</label>
+                        <textarea class="input-field" rows="3" placeholder="Brand, material, packaging details..."></textarea>
+                    </div>
+
+                    <div class="p-4 bg-gray-50 rounded-lg">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-text-secondary">Estimated CO₂ Impact:</span>
+                            <span class="text-lg font-mono font-bold text-text-primary">0.8 kg</span>
+                        </div>
+                        <p class="text-xs text-text-secondary mt-1">≈ Equivalent to 2 miles of average car driving</p>
+                    </div>
+
+                    <div class="flex space-x-3">
+                        <button type="submit" class="bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-gray-700 flex-1">Log Activity</button>
+                        <button type="button" onclick="closeCategoryModal()" class="px-4 py-2 border border-border rounded-lg text-text-secondary hover:bg-gray-50">Cancel</button>
+                    </div>
+                </form>
+            `;
+        }
+
+        function showQuickLog() {
+            // Simple mobile quick log - could open a simplified modal
+            openCategoryModal('transportation');
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('categoryModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeCategoryModal();
+            }
+        });
+
+        // Form submission handling
+        document.addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Here you would normally send the data to your backend
+            alert('Activity logged successfully! 🌱');
+            closeCategoryModal();
+        });
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>

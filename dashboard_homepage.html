@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - CarbonTracker</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fcarbontrac6420back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.6"></script>
+</head>
+<body class="bg-background min-h-screen">
+    <!-- Navigation Header -->
+    <nav class="bg-surface shadow-sm border-b border-border-light sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <svg class="w-8 h-8 text-secondary mr-3" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2L13.09 8.26L22 9L13.09 9.74L12 16L10.91 9.74L2 9L10.91 8.26L12 2Z"/>
+                        <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                    <span class="text-xl font-bold text-text-primary">CarbonTracker</span>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="dashboard_homepage.html" class="text-primary font-medium border-b-2 border-primary pb-1">Dashboard</a>
+                    <a href="activity_logging_interface.html" class="text-text-secondary hover:text-primary transition-colors">Log Activity</a>
+                    <a href="analytics_deep_dive.html" class="text-text-secondary hover:text-primary transition-colors">Analytics</a>
+                    <a href="activity_history_explorer.html" class="text-text-secondary hover:text-primary transition-colors">History</a>
+                    <a href="community_insights_comparisons.html" class="text-text-secondary hover:text-primary transition-colors">Community</a>
+                    <a href="user_profile_goals_center.html" class="text-text-secondary hover:text-primary transition-colors">Profile</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden p-2 rounded-lg hover:bg-gray-100" onclick="toggleMobileMenu()">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Mobile Navigation -->
+            <div id="mobileMenu" class="md:hidden hidden pb-4">
+                <div class="flex flex-col space-y-2">
+                    <a href="dashboard_homepage.html" class="text-primary font-medium px-3 py-2 rounded-lg bg-primary-50">Dashboard</a>
+                    <a href="activity_logging_interface.html" class="text-text-secondary hover:text-primary px-3 py-2 rounded-lg hover:bg-gray-50">Log Activity</a>
+                    <a href="analytics_deep_dive.html" class="text-text-secondary hover:text-primary px-3 py-2 rounded-lg hover:bg-gray-50">Analytics</a>
+                    <a href="activity_history_explorer.html" class="text-text-secondary hover:text-primary px-3 py-2 rounded-lg hover:bg-gray-50">History</a>
+                    <a href="community_insights_comparisons.html" class="text-text-secondary hover:text-primary px-3 py-2 rounded-lg hover:bg-gray-50">Community</a>
+                    <a href="user_profile_goals_center.html" class="text-text-secondary hover:text-primary px-3 py-2 rounded-lg hover:bg-gray-50">Profile</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Welcome Section -->
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-text-primary mb-2">Good morning, Alex! 🌱</h1>
+            <p class="text-text-secondary">Let's make today count for the planet. Here's your carbon footprint overview.</p>
+        </div>
+
+        <!-- Desktop Layout: Three Columns -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <!-- Left Column: Quick Actions & Recent Activity -->
+            <div class="lg:col-span-3 space-y-6">
+                <!-- Quick Action Buttons -->
+                <div class="card">
+                    <h3 class="text-lg font-semibold text-text-primary mb-4">Quick Log</h3>
+                    <div class="grid grid-cols-2 gap-3">
+                        <a href="activity_logging_interface.html" class="flex flex-col items-center p-4 rounded-lg border-2 border-accent-200 hover:border-accent-400 hover:bg-accent-50 transition-all group">
+                            <div class="w-12 h-12 bg-accent-100 rounded-full flex items-center justify-center mb-2 group-hover:bg-accent-200 transition-colors">
+                                <svg class="w-6 h-6 text-accent-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                </svg>
+                            </div>
+                            <span class="text-sm font-medium text-text-primary">Transport</span>
+                        </a>
+                        <a href="activity_logging_interface.html" class="flex flex-col items-center p-4 rounded-lg border-2 border-accent-200 hover:border-accent-400 hover:bg-accent-50 transition-all group">
+                            <div class="w-12 h-12 bg-accent-100 rounded-full flex items-center justify-center mb-2 group-hover:bg-accent-200 transition-colors">
+                                <svg class="w-6 h-6 text-accent-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                </svg>
+                            </div>
+                            <span class="text-sm font-medium text-text-primary">Energy</span>
+                        </a>
+                        <a href="activity_logging_interface.html" class="flex flex-col items-center p-4 rounded-lg border-2 border-accent-200 hover:border-accent-400 hover:bg-accent-50 transition-all group">
+                            <div class="w-12 h-12 bg-accent-100 rounded-full flex items-center justify-center mb-2 group-hover:bg-accent-200 transition-colors">
+                                <svg class="w-6 h-6 text-accent-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/>
+                                </svg>
+                            </div>
+                            <span class="text-sm font-medium text-text-primary">Food</span>
+                        </a>
+                        <a href="activity_logging_interface.html" class="flex flex-col items-center p-4 rounded-lg border-2 border-accent-200 hover:border-accent-400 hover:bg-accent-50 transition-all group">
+                            <div class="w-12 h-12 bg-accent-100 rounded-full flex items-center justify-center mb-2 group-hover:bg-accent-200 transition-colors">
+                                <svg class="w-6 h-6 text-accent-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                                </svg>
+                            </div>
+                            <span class="text-sm font-medium text-text-primary">Shopping</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Recent Activity Feed -->
+                <div class="card">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-text-primary">Recent Activity</h3>
+                        <a href="activity_history_explorer.html" class="text-primary text-sm hover:underline">View all</a>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center mr-3">
+                                    <svg class="w-4 h-4 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-text-primary">Car commute</p>
+                                    <p class="text-xs text-text-secondary">15 miles • 2 hours ago</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-sm font-mono font-medium text-text-primary">3.2 kg</p>
+                                <button class="text-xs text-primary hover:underline">Edit</button>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 bg-secondary-100 rounded-full flex items-center justify-center mr-3">
+                                    <svg class="w-4 h-4 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-text-primary">Home electricity</p>
+                                    <p class="text-xs text-text-secondary">12 kWh • 4 hours ago</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-sm font-mono font-medium text-text-primary">1.8 kg</p>
+                                <button class="text-xs text-primary hover:underline">Edit</button>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 bg-accent-100 rounded-full flex items-center justify-center mr-3">
+                                    <svg class="w-4 h-4 text-accent-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-text-primary">Lunch (beef)</p>
+                                    <p class="text-xs text-text-secondary">Restaurant • 6 hours ago</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-sm font-mono font-medium text-text-primary">2.1 kg</p>
+                                <button class="text-xs text-primary hover:underline">Edit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Center Column: Main Metrics & Charts -->
+            <div class="lg:col-span-6 space-y-6">
+                <!-- Today's Carbon Footprint Hero -->
+                <div class="card text-center">
+                    <h2 class="text-xl font-semibold text-text-primary mb-6">Today's Carbon Footprint</h2>
+                    <div class="relative inline-flex items-center justify-center">
+                        <!-- Circular Progress Indicator -->
+                        <svg class="w-48 h-48 transform -rotate-90" viewBox="0 0 100 100">
+                            <!-- Background circle -->
+                            <circle cx="50" cy="50" r="40" stroke="#E5E7EB" stroke-width="8" fill="none"/>
+                            <!-- Progress circle -->
+                            <circle cx="50" cy="50" r="40" stroke="#059669" stroke-width="8" fill="none" stroke-dasharray="251.2" stroke-dashoffset="75.36" stroke-linecap="round" class="transition-all duration-500 ease-out"/>
+                        </svg>
+                        <div class="absolute inset-0 flex flex-col items-center justify-center">
+                            <span class="text-4xl font-bold font-mono text-text-primary">2.4</span>
+                            <span class="text-lg text-text-secondary">kg CO₂</span>
+                            <span class="text-sm text-secondary font-medium mt-1">↓ 15% vs last week</span>
+                        </div>
+                    </div>
+                    <div class="mt-6 grid grid-cols-3 gap-4 text-center">
+                        <div>
+                            <p class="text-2xl font-bold font-mono text-text-primary">8.2</p>
+                            <p class="text-sm text-text-secondary">Weekly avg</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl font-bold font-mono text-primary">75%</p>
+                            <p class="text-sm text-text-secondary">Goal progress</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl font-bold font-mono text-accent">12</p>
+                            <p class="text-sm text-text-secondary">Days streak</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Monthly Trend Chart -->
+                <div class="card">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-text-primary">Monthly Trend</h3>
+                        <div class="flex space-x-2">
+                            <button class="px-3 py-1 text-sm bg-primary text-white rounded-lg">30 days</button>
+                            <button class="px-3 py-1 text-sm text-text-secondary hover:bg-gray-100 rounded-lg">90 days</button>
+                        </div>
+                    </div>
+                    <div class="h-64">
+                        <canvas id="trendChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Category Breakdown -->
+                <div class="card">
+                    <h3 class="text-lg font-semibold text-text-primary mb-4">Today's Breakdown</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <div class="w-4 h-4 bg-primary rounded mr-3"></div>
+                                <span class="text-text-primary">Transportation</span>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-32 bg-gray-200 rounded-full h-2 mr-3">
+                                    <div class="bg-primary h-2 rounded-full" style="width: 65%"></div>
+                                </div>
+                                <span class="text-sm font-mono font-medium text-text-primary w-12 text-right">1.6 kg</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <div class="w-4 h-4 bg-secondary rounded mr-3"></div>
+                                <span class="text-text-primary">Energy</span>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-32 bg-gray-200 rounded-full h-2 mr-3">
+                                    <div class="bg-secondary h-2 rounded-full" style="width: 45%"></div>
+                                </div>
+                                <span class="text-sm font-mono font-medium text-text-primary w-12 text-right">1.1 kg</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <div class="w-4 h-4 bg-accent rounded mr-3"></div>
+                                <span class="text-text-primary">Food</span>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-32 bg-gray-200 rounded-full h-2 mr-3">
+                                    <div class="bg-accent h-2 rounded-full" style="width: 35%"></div>
+                                </div>
+                                <span class="text-sm font-mono font-medium text-text-primary w-12 text-right">0.8 kg</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <div class="w-4 h-4 bg-gray-400 rounded mr-3"></div>
+                                <span class="text-text-primary">Shopping</span>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-32 bg-gray-200 rounded-full h-2 mr-3">
+                                    <div class="bg-gray-400 h-2 rounded-full" style="width: 15%"></div>
+                                </div>
+                                <span class="text-sm font-mono font-medium text-text-primary w-12 text-right">0.3 kg</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Insights & Community -->
+            <div class="lg:col-span-3 space-y-6">
+                <!-- Weekly Insights -->
+                <div class="card">
+                    <h3 class="text-lg font-semibold text-text-primary mb-4">Weekly Insights</h3>
+                    <div class="space-y-4">
+                        <div class="p-3 bg-secondary-50 rounded-lg border border-secondary-200">
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 bg-secondary-100 rounded-full flex items-center justify-center mr-3 mt-0.5">
+                                    <svg class="w-4 h-4 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-text-primary">Great progress!</p>
+                                    <p class="text-xs text-text-secondary mt-1">You've reduced transport emissions by 20% this week</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-3 bg-accent-50 rounded-lg border border-accent-200">
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 bg-accent-100 rounded-full flex items-center justify-center mr-3 mt-0.5">
+                                    <svg class="w-4 h-4 text-accent-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-text-primary">Opportunity</p>
+                                    <p class="text-xs text-text-secondary mt-1">Try plant-based meals 2x this week to reduce food impact</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Achievement Badges -->
+                <div class="card">
+                    <h3 class="text-lg font-semibold text-text-primary mb-4">Recent Achievements</h3>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="text-center p-3 bg-secondary-50 rounded-lg">
+                            <div class="w-12 h-12 bg-secondary-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                                <svg class="w-6 h-6 text-secondary-600" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                </svg>
+                            </div>
+                            <p class="text-xs font-medium text-text-primary">Week Warrior</p>
+                            <p class="text-xs text-text-secondary">7 days logged</p>
+                        </div>
+                        <div class="text-center p-3 bg-accent-50 rounded-lg">
+                            <div class="w-12 h-12 bg-accent-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                                <svg class="w-6 h-6 text-accent-600" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                </svg>
+                            </div>
+                            <p class="text-xs font-medium text-text-primary">Eco Reducer</p>
+                            <p class="text-xs text-text-secondary">15% reduction</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Community Comparison -->
+                <div class="card">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-text-primary">Community Comparison</h3>
+                        <a href="community_insights_comparisons.html" class="text-primary text-sm hover:underline">View more</a>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-sm text-text-secondary">vs Similar Users</span>
+                                <span class="text-sm font-medium text-secondary">22% better</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-secondary h-2 rounded-full" style="width: 78%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-sm text-text-secondary">vs Global Average</span>
+                                <span class="text-sm font-medium text-primary">35% better</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-primary h-2 rounded-full" style="width: 65%"></div>
+                            </div>
+                        </div>
+                        <div class="text-center pt-2">
+                            <p class="text-xs text-text-secondary">You're in the top <span class="font-medium text-secondary">25%</span> of users!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Tips -->
+                <div class="card">
+                    <h3 class="text-lg font-semibold text-text-primary mb-4">Today's Tip</h3>
+                    <div class="p-4 bg-primary-50 rounded-lg border border-primary-200">
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center mr-3 mt-0.5">
+                                <svg class="w-4 h-4 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium text-text-primary">Switch to LED bulbs</p>
+                                <p class="text-xs text-text-secondary mt-1">Could save 0.5 kg CO₂ daily from your home energy usage</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Floating Action Button -->
+    <div class="fixed bottom-6 right-6 md:hidden">
+        <a href="activity_logging_interface.html" class="w-14 h-14 bg-accent text-white rounded-full shadow-lg flex items-center justify-center hover:bg-accent-600 transition-colors">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+            </svg>
+        </a>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Initialize Chart.js
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('trendChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan 1', 'Jan 8', 'Jan 15', 'Jan 22', 'Jan 29', 'Feb 5', 'Feb 12', 'Feb 19', 'Feb 26', 'Mar 5', 'Mar 12', 'Mar 19', 'Mar 26', 'Apr 2'],
+                    datasets: [{
+                        label: 'Daily CO₂ (kg)',
+                        data: [3.2, 2.8, 3.1, 2.9, 2.6, 2.4, 2.7, 2.3, 2.1, 2.5, 2.2, 2.0, 2.3, 2.4],
+                        borderColor: '#059669',
+                        backgroundColor: 'rgba(5, 150, 105, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4,
+                        pointBackgroundColor: '#059669',
+                        pointBorderColor: '#ffffff',
+                        pointBorderWidth: 2,
+                        pointRadius: 4,
+                        pointHoverRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: '#6B7280',
+                                font: {
+                                    size: 12
+                                }
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: '#F3F4F6'
+                            },
+                            ticks: {
+                                color: '#6B7280',
+                                font: {
+                                    size: 12
+                                },
+                                callback: function(value) {
+                                    return value + ' kg';
+                                }
+                            }
+                        }
+                    },
+                    interaction: {
+                        intersect: false,
+                        mode: 'index'
+                    }
+                }
+            });
+        });
+
+        // Animate progress bars on load
+        window.addEventListener('load', function() {
+            const progressBars = document.querySelectorAll('[style*="width:"]');
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.transition = 'width 1s ease-out';
+                    bar.style.width = width;
+                }, 500);
+            });
+        });
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>

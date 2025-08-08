@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Activity History - CarbonTracker</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fcarbontrac6420back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.6"></script>
+</head>
+<body class="bg-background min-h-screen">
+    <!-- Navigation Header -->
+    <nav class="bg-surface shadow-sm border-b border-border-light sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <svg class="w-8 h-8 text-secondary mr-3" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2L13.09 8.26L22 9L13.09 9.74L12 16L10.91 9.74L2 9L10.91 8.26L12 2Z"/>
+                        <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                    <span class="text-xl font-bold text-text-primary">CarbonTracker</span>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="dashboard_homepage.html" class="text-text-secondary hover:text-primary transition-colors">Dashboard</a>
+                    <a href="activity_logging_interface.html" class="text-text-secondary hover:text-primary transition-colors">Log Activity</a>
+                    <a href="analytics_deep_dive.html" class="text-text-secondary hover:text-primary transition-colors">Analytics</a>
+                    <a href="activity_history_explorer.html" class="text-primary font-medium border-b-2 border-primary pb-1">History</a>
+                    <a href="community_insights_comparisons.html" class="text-text-secondary hover:text-primary transition-colors">Community</a>
+                    <a href="user_profile_goals_center.html" class="text-text-secondary hover:text-primary transition-colors">Profile</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden p-2 rounded-lg hover:bg-gray-100" onclick="toggleMobileMenu()">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Mobile Navigation -->
+            <div id="mobileMenu" class="md:hidden hidden pb-4">
+                <div class="flex flex-col space-y-2">
+                    <a href="dashboard_homepage.html" class="text-text-secondary hover:text-primary px-3 py-2 rounded-lg hover:bg-gray-50">Dashboard</a>
+                    <a href="activity_logging_interface.html" class="text-text-secondary hover:text-primary px-3 py-2 rounded-lg hover:bg-gray-50">Log Activity</a>
+                    <a href="analytics_deep_dive.html" class="text-text-secondary hover:text-primary px-3 py-2 rounded-lg hover:bg-gray-50">Analytics</a>
+                    <a href="activity_history_explorer.html" class="text-primary font-medium px-3 py-2 rounded-lg bg-primary-50">History</a>
+                    <a href="community_insights_comparisons.html" class="text-text-secondary hover:text-primary px-3 py-2 rounded-lg hover:bg-gray-50">Community</a>
+                    <a href="user_profile_goals_center.html" class="text-text-secondary hover:text-primary px-3 py-2 rounded-lg hover:bg-gray-50">Profile</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Header Section -->
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-text-primary mb-2">Activity History 📊</h1>
+            <p class="text-text-secondary">Explore your carbon footprint journey with detailed insights and patterns.</p>
+        </div>
+
+        <!-- Search and Filter Section -->
+        <div class="card mb-8">
+            <div class="flex flex-col lg:flex-row gap-6">
+                <!-- Search Bar -->
+                <div class="flex-1">
+                    <label class="block text-sm font-medium text-text-primary mb-2">Search Activities</label>
+                    <div class="relative">
+                        <input type="text" placeholder="Try 'flights last summer' or 'grocery shopping in March'" class="input-field pl-10 pr-4" id="searchInput" />
+                        <svg class="w-5 h-5 text-text-secondary absolute left-3 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Quick Filters -->
+                <div class="flex flex-wrap gap-3 items-end">
+                    <div>
+                        <label class="block text-sm font-medium text-text-primary mb-2">Date Range</label>
+                        <select class="input-field w-40" id="dateFilter">
+                            <option value="all">All Time</option>
+                            <option value="today">Today</option>
+                            <option value="week">This Week</option>
+                            <option value="month" selected>This Month</option>
+                            <option value="quarter">This Quarter</option>
+                            <option value="year">This Year</option>
+                            <option value="custom">Custom Range</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-text-primary mb-2">Category</label>
+                        <select class="input-field w-36" id="categoryFilter">
+                            <option value="all">All Categories</option>
+                            <option value="transport">Transport</option>
+                            <option value="energy">Energy</option>
+                            <option value="food">Food</option>
+                            <option value="shopping">Shopping</option>
+                        </select>
+                    </div>
+                    <button class="btn-primary h-10 px-4" onclick="applyFilters()">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/>
+                        </svg>
+                        Filter
+                    </button>
+                </div>
+            </div>
+
+            <!-- Advanced Filters (Collapsible) -->
+            <div id="advancedFilters" class="hidden mt-6 pt-6 border-t border-border-light">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-text-primary mb-2">Carbon Impact</label>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="rounded border-border text-primary focus:ring-primary" checked />
+                                <span class="ml-2 text-sm text-text-primary">Low (< 1 kg CO₂)</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="rounded border-border text-primary focus:ring-primary" checked />
+                                <span class="ml-2 text-sm text-text-primary">Medium (1-5 kg CO₂)</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="rounded border-border text-primary focus:ring-primary" checked />
+                                <span class="ml-2 text-sm text-text-primary">High (> 5 kg CO₂)</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-text-primary mb-2">Custom Date Range</label>
+                        <div class="space-y-2">
+                            <input type="date" class="input-field text-sm" value="2025-07-01" />
+                            <input type="date" class="input-field text-sm" value="2025-08-04" />
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-text-primary mb-2">Tags</label>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2 py-1 bg-primary-100 text-primary text-xs rounded-full cursor-pointer hover:bg-primary-200">work</span>
+                            <span class="px-2 py-1 bg-secondary-100 text-secondary text-xs rounded-full cursor-pointer hover:bg-secondary-200">vacation</span>
+                            <span class="px-2 py-1 bg-accent-100 text-accent text-xs rounded-full cursor-pointer hover:bg-accent-200">weekend</span>
+                            <span class="px-2 py-1 bg-gray-100 text-text-secondary text-xs rounded-full cursor-pointer hover:bg-gray-200">+ Add Tag</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="text-primary text-sm hover:underline mt-4" onclick="toggleAdvancedFilters()">
+                <span id="advancedToggleText">Show Advanced Filters</span>
+                <svg class="w-4 h-4 inline ml-1 transform transition-transform" id="advancedToggleIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <!-- Left Column: Calendar Heat Map & Stats -->
+            <div class="lg:col-span-4 space-y-6">
+                <!-- Calendar Heat Map -->
+                <div class="card">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-text-primary">Activity Calendar</h3>
+                        <div class="flex space-x-2">
+                            <button class="p-1 hover:bg-gray-100 rounded" onclick="previousMonth()">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                                </svg>
+                            </button>
+                            <span class="text-sm font-medium text-text-primary px-2 py-1">August 2025</span>
+                            <button class="p-1 hover:bg-gray-100 rounded" onclick="nextMonth()">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Calendar Grid -->
+                    <div class="grid grid-cols-7 gap-1 mb-4">
+                        <!-- Day Headers -->
+                        <div class="text-xs font-medium text-text-secondary text-center py-2">S</div>
+                        <div class="text-xs font-medium text-text-secondary text-center py-2">M</div>
+                        <div class="text-xs font-medium text-text-secondary text-center py-2">T</div>
+                        <div class="text-xs font-medium text-text-secondary text-center py-2">W</div>
+                        <div class="text-xs font-medium text-text-secondary text-center py-2">T</div>
+                        <div class="text-xs font-medium text-text-secondary text-center py-2">F</div>
+                        <div class="text-xs font-medium text-text-secondary text-center py-2">S</div>
+                        
+                        <!-- Calendar Days -->
+                        <div class="aspect-square flex items-center justify-center text-xs text-text-secondary">28</div>
+                        <div class="aspect-square flex items-center justify-center text-xs text-text-secondary">29</div>
+                        <div class="aspect-square flex items-center justify-center text-xs text-text-secondary">30</div>
+                        <div class="aspect-square flex items-center justify-center text-xs text-text-secondary">31</div>
+                        <div class="aspect-square flex items-center justify-center text-xs bg-secondary-100 rounded cursor-pointer hover:bg-secondary-200">1</div>
+                        <div class="aspect-square flex items-center justify-center text-xs bg-primary-100 rounded cursor-pointer hover:bg-primary-200">2</div>
+                        <div class="aspect-square flex items-center justify-center text-xs bg-accent-100 rounded cursor-pointer hover:bg-accent-200">3</div>
+                        <div class="aspect-square flex items-center justify-center text-xs bg-primary-200 rounded cursor-pointer hover:bg-primary-300 font-medium border-2 border-primary">4</div>
+                        <div class="aspect-square flex items-center justify-center text-xs bg-gray-100 rounded cursor-pointer hover:bg-gray-200">5</div>
+                        <div class="aspect-square flex items-center justify-center text-xs">6</div>
+                        <div class="aspect-square flex items-center justify-center text-xs">7</div>
+                        <div class="aspect-square flex items-center justify-center text-xs bg-secondary-100 rounded cursor-pointer hover:bg-secondary-200">8</div>
+                        <div class="aspect-square flex items-center justify-center text-xs">9</div>
+                        <div class="aspect-square flex items-center justify-center text-xs">10</div>
+                        <div class="aspect-square flex items-center justify-center text-xs">11</div>
+                        <div class="aspect-square flex items-center justify-center text-xs">12</div>
+                        <div class="aspect-square flex items-center justify-center text-xs">13</div>
+                        <div class="aspect-square flex items-center justify-center text-xs">14</div>
+                        <div class="aspect-square flex items-center justify-center text-xs">15</div>
+                        <div class="aspect-square flex items-center justify-center text-xs">16</div>
+                        <div class="aspect-square flex items-center justify-center text-xs">17</div>
+                        <div class="aspect-square flex items-center justify-center text-xs">18</div>
+                        <div class="aspect-square flex items-center justify-center text-xs">19</div>
+                        <div class="aspect-square flex items-center justify-center text-xs">20</div>
+                        <div class="aspect-square flex items-center justify-center text-xs">21</div>
+                        <div class="aspect-square flex items-center justify-center text-xs">22</div>
+                        <div class="aspect-square flex items-center justify-center text-xs">23</div>
+                        <div class="aspect-square flex items-center justify-center text-xs">24</div>
+                        <div class="aspect-square flex items-center justify-center text-xs">25</div>
+                        <div class="aspect-square flex items-center justify-center text-xs">26</div>
+                        <div class="aspect-square flex items-center justify-center text-xs">27</div>
+                        <div class="aspect-square flex items-center justify-center text-xs">28</div>
+                        <div class="aspect-square flex items-center justify-center text-xs">29</div>
+                        <div class="aspect-square flex items-center justify-center text-xs">30</div>
+                        <div class="aspect-square flex items-center justify-center text-xs">31</div>
+                    </div>
+
+                    <!-- Legend -->
+                    <div class="flex items-center justify-between text-xs">
+                        <span class="text-text-secondary">Less</span>
+                        <div class="flex space-x-1">
+                            <div class="w-3 h-3 bg-gray-100 rounded"></div>
+                            <div class="w-3 h-3 bg-secondary-100 rounded"></div>
+                            <div class="w-3 h-3 bg-primary-100 rounded"></div>
+                            <div class="w-3 h-3 bg-accent-100 rounded"></div>
+                            <div class="w-3 h-3 bg-primary-200 rounded"></div>
+                        </div>
+                        <span class="text-text-secondary">More</span>
+                    </div>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="card">
+                    <h3 class="text-lg font-semibold text-text-primary mb-4">Period Summary</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-text-secondary">Total Activities</span>
+                            <span class="font-mono font-medium text-text-primary">127</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-text-secondary">Total CO₂</span>
+                            <span class="font-mono font-medium text-text-primary">89.4 kg</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-text-secondary">Daily Average</span>
+                            <span class="font-mono font-medium text-text-primary">2.9 kg</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-text-secondary">Most Active Day</span>
+                            <span class="font-mono font-medium text-text-primary">Aug 1</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-text-secondary">Streak</span>
+                            <span class="font-mono font-medium text-secondary">12 days</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pattern Recognition -->
+                <div class="card">
+                    <h3 class="text-lg font-semibold text-text-primary mb-4">Detected Patterns</h3>
+                    <div class="space-y-3">
+                        <div class="p-3 bg-secondary-50 rounded-lg border border-secondary-200">
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 bg-secondary-100 rounded-full flex items-center justify-center mr-3 mt-0.5">
+                                    <svg class="w-4 h-4 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-text-primary">Weekly Commute</p>
+                                    <p class="text-xs text-text-secondary mt-1">15-mile car trips every weekday at 8:30 AM</p>
+                                    <button class="text-xs text-primary hover:underline mt-1">Automate logging</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-3 bg-accent-50 rounded-lg border border-accent-200">
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 bg-accent-100 rounded-full flex items-center justify-center mr-3 mt-0.5">
+                                    <svg class="w-4 h-4 text-accent-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-text-primary">Weekend Spike</p>
+                                    <p class="text-xs text-text-secondary mt-1">Higher energy usage on Saturdays</p>
+                                    <button class="text-xs text-primary hover:underline mt-1">View details</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Activity Timeline -->
+            <div class="lg:col-span-8">
+                <!-- Bulk Actions Bar -->
+                <div class="card mb-6">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                        <div class="flex items-center space-x-4">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="rounded border-border text-primary focus:ring-primary" id="selectAll" />
+                                <span class="ml-2 text-sm text-text-primary">Select All</span>
+                            </label>
+                            <span class="text-sm text-text-secondary" id="selectedCount">0 selected</span>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="btn-secondary text-sm px-3 py-2" onclick="bulkEdit()" disabled id="bulkEditBtn">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                </svg>
+                                Bulk Edit
+                            </button>
+                            <button class="btn-primary text-sm px-3 py-2" onclick="exportData()">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                </svg>
+                                Export
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Activity Timeline -->
+                <div class="space-y-4" id="activityTimeline">
+                    <!-- Today Section -->
+                    <div class="mb-6">
+                        <div class="flex items-center mb-4">
+                            <h3 class="text-lg font-semibold text-text-primary">Today - August 4, 2025</h3>
+                            <div class="ml-4 px-3 py-1 bg-primary-100 text-primary text-sm rounded-full">3 activities</div>
+                        </div>
+
+                        <!-- Activity Entry -->
+                        <div class="card hover:shadow-md transition-shadow cursor-pointer" onclick="toggleActivityDetails('activity1')">
+                            <div class="flex items-start justify-between">
+                                <div class="flex items-start space-x-4 flex-1">
+                                    <input type="checkbox" class="rounded border-border text-primary focus:ring-primary mt-1 activity-checkbox" />
+                                    <div class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center">
+                                        <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex items-center justify-between mb-2">
+                                            <h4 class="font-semibold text-text-primary">Morning Commute</h4>
+                                            <div class="flex items-center space-x-2">
+                                                <span class="font-mono font-medium text-text-primary">3.2 kg CO₂</span>
+                                                <div class="w-3 h-3 bg-error rounded-full" title="High Impact"></div>
+                                            </div>
+                                        </div>
+                                        <p class="text-sm text-text-secondary mb-2">Car • 15 miles • 8:30 AM</p>
+                                        <div class="flex items-center space-x-2">
+                                            <span class="px-2 py-1 bg-primary-100 text-primary text-xs rounded-full">work</span>
+                                            <span class="px-2 py-1 bg-gray-100 text-text-secondary text-xs rounded-full">recurring</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-2 ml-4">
+                                    <button class="p-2 hover:bg-gray-100 rounded-lg" onclick="editActivity('activity1'); event.stopPropagation();">
+                                        <svg class="w-4 h-4 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                        </svg>
+                                    </button>
+                                    <svg class="w-5 h-5 text-text-secondary transform transition-transform" id="activity1-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <!-- Expandable Details -->
+                            <div id="activity1-details" class="hidden mt-4 pt-4 border-t border-border-light">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <h5 class="font-medium text-text-primary mb-2">Trip Details</h5>
+                                        <div class="space-y-1 text-sm text-text-secondary">
+                                            <p><span class="font-medium">Route:</span> Home → Office</p>
+                                            <p><span class="font-medium">Vehicle:</span> 2022 Honda Civic</p>
+                                            <p><span class="font-medium">Fuel Type:</span> Gasoline</p>
+                                            <p><span class="font-medium">Passengers:</span> 1 (driver only)</p>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-medium text-text-primary mb-2">Environmental Impact</h5>
+                                        <div class="space-y-1 text-sm text-text-secondary">
+                                            <p><span class="font-medium">CO₂ Calculation:</span> 0.21 kg/mile × 15 miles</p>
+                                            <p><span class="font-medium">Alternative:</span> Public transit (-2.1 kg)</p>
+                                            <p><span class="font-medium">Bike/Walk:</span> (-3.2 kg)</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-4 flex space-x-2">
+                                    <button class="text-primary text-sm hover:underline">Suggest alternatives</button>
+                                    <button class="text-primary text-sm hover:underline">Add to recurring</button>
+                                    <button class="text-error text-sm hover:underline">Delete activity</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- More activities for today -->
+                        <div class="card hover:shadow-md transition-shadow cursor-pointer mt-4" onclick="toggleActivityDetails('activity2')">
+                            <div class="flex items-start justify-between">
+                                <div class="flex items-start space-x-4 flex-1">
+                                    <input type="checkbox" class="rounded border-border text-primary focus:ring-primary mt-1 activity-checkbox" />
+                                    <div class="w-12 h-12 bg-secondary-100 rounded-full flex items-center justify-center">
+                                        <svg class="w-6 h-6 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex items-center justify-between mb-2">
+                                            <h4 class="font-semibold text-text-primary">Home Electricity</h4>
+                                            <div class="flex items-center space-x-2">
+                                                <span class="font-mono font-medium text-text-primary">1.8 kg CO₂</span>
+                                                <div class="w-3 h-3 bg-warning rounded-full" title="Medium Impact"></div>
+                                            </div>
+                                        </div>
+                                        <p class="text-sm text-text-secondary mb-2">12 kWh • 6:00 AM - 2:00 PM</p>
+                                        <div class="flex items-center space-x-2">
+                                            <span class="px-2 py-1 bg-secondary-100 text-secondary text-xs rounded-full">home</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-2 ml-4">
+                                    <button class="p-2 hover:bg-gray-100 rounded-lg" onclick="editActivity('activity2'); event.stopPropagation();">
+                                        <svg class="w-4 h-4 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                        </svg>
+                                    </button>
+                                    <svg class="w-5 h-5 text-text-secondary transform transition-transform" id="activity2-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card hover:shadow-md transition-shadow cursor-pointer mt-4" onclick="toggleActivityDetails('activity3')">
+                            <div class="flex items-start justify-between">
+                                <div class="flex items-start space-x-4 flex-1">
+                                    <input type="checkbox" class="rounded border-border text-primary focus:ring-primary mt-1 activity-checkbox" />
+                                    <div class="w-12 h-12 bg-accent-100 rounded-full flex items-center justify-center">
+                                        <svg class="w-6 h-6 text-accent-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/>
+                                        </svg>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex items-center justify-between mb-2">
+                                            <h4 class="font-semibold text-text-primary">Lunch</h4>
+                                            <div class="flex items-center space-x-2">
+                                                <span class="font-mono font-medium text-text-primary">2.1 kg CO₂</span>
+                                                <div class="w-3 h-3 bg-warning rounded-full" title="Medium Impact"></div>
+                                            </div>
+                                        </div>
+                                        <p class="text-sm text-text-secondary mb-2">Beef burger • Restaurant • 12:30 PM</p>
+                                        <div class="flex items-center space-x-2">
+                                            <span class="px-2 py-1 bg-accent-100 text-accent text-xs rounded-full">dining</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-2 ml-4">
+                                    <button class="p-2 hover:bg-gray-100 rounded-lg" onclick="editActivity('activity3'); event.stopPropagation();">
+                                        <svg class="w-4 h-4 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                        </svg>
+                                    </button>
+                                    <svg class="w-5 h-5 text-text-secondary transform transition-transform" id="activity3-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Yesterday Section -->
+                    <div class="mb-6">
+                        <div class="flex items-center mb-4">
+                            <h3 class="text-lg font-semibold text-text-primary">Yesterday - August 3, 2025</h3>
+                            <div class="ml-4 px-3 py-1 bg-secondary-100 text-secondary text-sm rounded-full">5 activities</div>
+                        </div>
+
+                        <div class="card hover:shadow-md transition-shadow cursor-pointer">
+                            <div class="flex items-start justify-between">
+                                <div class="flex items-start space-x-4 flex-1">
+                                    <input type="checkbox" class="rounded border-border text-primary focus:ring-primary mt-1 activity-checkbox" />
+                                    <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center">
+                                        <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex items-center justify-between mb-2">
+                                            <h4 class="font-semibold text-text-primary">Online Shopping</h4>
+                                            <div class="flex items-center space-x-2">
+                                                <span class="font-mono font-medium text-text-primary">0.8 kg CO₂</span>
+                                                <div class="w-3 h-3 bg-success rounded-full" title="Low Impact"></div>
+                                            </div>
+                                        </div>
+                                        <p class="text-sm text-text-secondary mb-2">Electronics • Express shipping • 3:45 PM</p>
+                                        <div class="flex items-center space-x-2">
+                                            <span class="px-2 py-1 bg-gray-100 text-text-secondary text-xs rounded-full">shopping</span>
+                                            <span class="px-2 py-1 bg-accent-100 text-accent text-xs rounded-full">weekend</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-2 ml-4">
+                                    <button class="p-2 hover:bg-gray-100 rounded-lg">
+                                        <svg class="w-4 h-4 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Load More Button -->
+                    <div class="text-center py-8">
+                        <button class="btn-primary px-6 py-3" onclick="loadMoreActivities()">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                            </svg>
+                            Load More Activities
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Floating Action Button -->
+    <div class="fixed bottom-6 right-6 md:hidden">
+        <a href="activity_logging_interface.html" class="w-14 h-14 bg-accent text-white rounded-full shadow-lg flex items-center justify-center hover:bg-accent-600 transition-colors">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+            </svg>
+        </a>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Advanced filters toggle
+        function toggleAdvancedFilters() {
+            const filters = document.getElementById('advancedFilters');
+            const toggleText = document.getElementById('advancedToggleText');
+            const toggleIcon = document.getElementById('advancedToggleIcon');
+            
+            filters.classList.toggle('hidden');
+            if (filters.classList.contains('hidden')) {
+                toggleText.textContent = 'Show Advanced Filters';
+                toggleIcon.style.transform = 'rotate(0deg)';
+            } else {
+                toggleText.textContent = 'Hide Advanced Filters';
+                toggleIcon.style.transform = 'rotate(180deg)';
+            }
+        }
+
+        // Activity details toggle
+        function toggleActivityDetails(activityId) {
+            const details = document.getElementById(activityId + '-details');
+            const chevron = document.getElementById(activityId + '-chevron');
+            
+            details.classList.toggle('hidden');
+            if (details.classList.contains('hidden')) {
+                chevron.style.transform = 'rotate(0deg)';
+            } else {
+                chevron.style.transform = 'rotate(180deg)';
+            }
+        }
+
+        // Checkbox management
+        document.addEventListener('DOMContentLoaded', function() {
+            const selectAllCheckbox = document.getElementById('selectAll');
+            const activityCheckboxes = document.querySelectorAll('.activity-checkbox');
+            const selectedCount = document.getElementById('selectedCount');
+            const bulkEditBtn = document.getElementById('bulkEditBtn');
+
+            function updateSelectedCount() {
+                const checkedBoxes = document.querySelectorAll('.activity-checkbox:checked');
+                const count = checkedBoxes.length;
+                selectedCount.textContent = `${count} selected`;
+                bulkEditBtn.disabled = count === 0;
+                
+                if (count === 0) {
+                    bulkEditBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                } else {
+                    bulkEditBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                }
+            }
+
+            selectAllCheckbox.addEventListener('change', function() {
+                activityCheckboxes.forEach(checkbox => {
+                    checkbox.checked = this.checked;
+                });
+                updateSelectedCount();
+            });
+
+            activityCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', updateSelectedCount);
+            });
+        });
+
+        // Filter functions
+        function applyFilters() {
+            const searchTerm = document.getElementById('searchInput').value;
+            const dateFilter = document.getElementById('dateFilter').value;
+            const categoryFilter = document.getElementById('categoryFilter').value;
+            
+            // Simulate filtering (in real app, this would make API calls)
+            console.log('Applying filters:', { searchTerm, dateFilter, categoryFilter });
+            
+            // Show loading state
+            const timeline = document.getElementById('activityTimeline');
+            timeline.innerHTML = '<div class="text-center py-8"><div class="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div><p class="text-text-secondary mt-2">Filtering activities...</p></div>';
+            
+            // Simulate API delay
+            setTimeout(() => {
+                location.reload(); // In real app, update with filtered results
+            }, 1000);
+        }
+
+        // Calendar navigation
+        function previousMonth() {
+            console.log('Previous month');
+        }
+
+        function nextMonth() {
+            console.log('Next month');
+        }
+
+        // Activity actions
+        function editActivity(activityId) {
+            console.log('Edit activity:', activityId);
+            // In real app, open edit modal or navigate to edit page
+        }
+
+        function bulkEdit() {
+            const checkedBoxes = document.querySelectorAll('.activity-checkbox:checked');
+            console.log('Bulk edit:', checkedBoxes.length, 'activities');
+            // In real app, open bulk edit modal
+        }
+
+        function exportData() {
+            console.log('Export data');
+            // In real app, generate and download report
+            alert('Export functionality would generate a detailed CSV/PDF report of your selected activities and time period.');
+        }
+
+        function loadMoreActivities() {
+            const button = event.target;
+            button.innerHTML = '<svg class="w-4 h-4 mr-2 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>Loading...';
+            
+            // Simulate loading more activities
+            setTimeout(() => {
+                button.innerHTML = '<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>Load More Activities';
+                console.log('More activities loaded');
+            }, 1500);
+        }
+
+        // Search functionality with debounce
+        let searchTimeout;
+        document.getElementById('searchInput').addEventListener('input', function() {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                const query = this.value;
+                if (query.length > 2) {
+                    console.log('Searching for:', query);
+                    // In real app, perform search with natural language processing
+                }
+            }, 300);
+        });
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Activity History Explorer loaded');
+            
+            // Animate calendar heat map on load
+            const calendarDays = document.querySelectorAll('.aspect-square');
+            calendarDays.forEach((day, index) => {
+                if (day.classList.contains('bg-primary-100') || day.classList.contains('bg-secondary-100') || day.classList.contains('bg-accent-100')) {
+                    setTimeout(() => {
+                        day.style.transform = 'scale(1.1)';
+                        setTimeout(() => {
+                            day.style.transform = 'scale(1)';
+                        }, 200);
+                    }, index * 50);
+                }
+            });
+        });
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>

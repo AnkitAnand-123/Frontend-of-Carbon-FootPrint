@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Analytics Deep Dive - CarbonTracker</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fcarbontrac6420back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.6"></script>
+</head>
+<body class="bg-background min-h-screen">
+    <!-- Navigation Header -->
+    <nav class="bg-surface shadow-sm border-b border-border-light sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <svg class="w-8 h-8 text-secondary mr-3" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2L13.09 8.26L22 9L13.09 9.74L12 16L10.91 9.74L2 9L10.91 8.26L12 2Z"/>
+                        <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                    <span class="text-xl font-bold text-text-primary">CarbonTracker</span>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="dashboard_homepage.html" class="text-text-secondary hover:text-primary transition-colors">Dashboard</a>
+                    <a href="activity_logging_interface.html" class="text-text-secondary hover:text-primary transition-colors">Log Activity</a>
+                    <a href="analytics_deep_dive.html" class="text-primary font-medium border-b-2 border-primary pb-1">Analytics</a>
+                    <a href="activity_history_explorer.html" class="text-text-secondary hover:text-primary transition-colors">History</a>
+                    <a href="community_insights_comparisons.html" class="text-text-secondary hover:text-primary transition-colors">Community</a>
+                    <a href="user_profile_goals_center.html" class="text-text-secondary hover:text-primary transition-colors">Profile</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden p-2 rounded-lg hover:bg-gray-100" onclick="toggleMobileMenu()">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Mobile Navigation -->
+            <div id="mobileMenu" class="md:hidden hidden pb-4">
+                <div class="flex flex-col space-y-2">
+                    <a href="dashboard_homepage.html" class="text-text-secondary hover:text-primary px-3 py-2 rounded-lg hover:bg-gray-50">Dashboard</a>
+                    <a href="activity_logging_interface.html" class="text-text-secondary hover:text-primary px-3 py-2 rounded-lg hover:bg-gray-50">Log Activity</a>
+                    <a href="analytics_deep_dive.html" class="text-primary font-medium px-3 py-2 rounded-lg bg-primary-50">Analytics</a>
+                    <a href="activity_history_explorer.html" class="text-text-secondary hover:text-primary px-3 py-2 rounded-lg hover:bg-gray-50">History</a>
+                    <a href="community_insights_comparisons.html" class="text-text-secondary hover:text-primary px-3 py-2 rounded-lg hover:bg-gray-50">Community</a>
+                    <a href="user_profile_goals_center.html" class="text-text-secondary hover:text-primary px-3 py-2 rounded-lg hover:bg-gray-50">Profile</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Header Section -->
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-text-primary mb-2">Analytics Deep Dive 📊</h1>
+            <p class="text-text-secondary">Comprehensive insights into your carbon footprint patterns and reduction opportunities.</p>
+        </div>
+
+        <!-- Time Period Selector -->
+        <div class="mb-8">
+            <div class="flex flex-wrap gap-2">
+                <button id="daily-btn" class="px-4 py-2 text-sm font-medium rounded-lg bg-primary text-white transition-colors" onclick="switchTimeframe('daily')">Daily</button>
+                <button id="weekly-btn" class="px-4 py-2 text-sm font-medium rounded-lg text-text-secondary hover:bg-gray-100 transition-colors" onclick="switchTimeframe('weekly')">Weekly</button>
+                <button id="monthly-btn" class="px-4 py-2 text-sm font-medium rounded-lg text-text-secondary hover:bg-gray-100 transition-colors" onclick="switchTimeframe('monthly')">Monthly</button>
+                <button id="yearly-btn" class="px-4 py-2 text-sm font-medium rounded-lg text-text-secondary hover:bg-gray-100 transition-colors" onclick="switchTimeframe('yearly')">Yearly</button>
+            </div>
+        </div>
+
+        <!-- Main Analytics Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <!-- Left Column: Filters & Controls -->
+            <div class="lg:col-span-3 space-y-6">
+                <!-- Advanced Filters -->
+                <div class="card">
+                    <h3 class="text-lg font-semibold text-text-primary mb-4">Advanced Filters</h3>
+                    <div class="space-y-4">
+                        <!-- Date Range -->
+                        <div>
+                            <label class="block text-sm font-medium text-text-primary mb-2">Date Range</label>
+                            <div class="grid grid-cols-2 gap-2">
+                                <input type="date" class="input-field text-sm" value="2025-07-01" />
+                                <input type="date" class="input-field text-sm" value="2025-08-04" />
+                            </div>
+                        </div>
+
+                        <!-- Category Filter -->
+                        <div>
+                            <label class="block text-sm font-medium text-text-primary mb-2">Categories</label>
+                            <div class="space-y-2">
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="rounded border-border text-primary focus:ring-primary" checked />
+                                    <span class="ml-2 text-sm text-text-primary">Transportation</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="rounded border-border text-primary focus:ring-primary" checked />
+                                    <span class="ml-2 text-sm text-text-primary">Energy</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="rounded border-border text-primary focus:ring-primary" checked />
+                                    <span class="ml-2 text-sm text-text-primary">Food</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="rounded border-border text-primary focus:ring-primary" checked />
+                                    <span class="ml-2 text-sm text-text-primary">Shopping</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Weather Pattern -->
+                        <div>
+                            <label class="block text-sm font-medium text-text-primary mb-2">Weather Pattern</label>
+                            <select class="input-field text-sm">
+                                <option>All Weather</option>
+                                <option>Sunny Days</option>
+                                <option>Rainy Days</option>
+                                <option>Cold Weather</option>
+                                <option>Hot Weather</option>
+                            </select>
+                        </div>
+
+                        <!-- Lifestyle Changes -->
+                        <div>
+                            <label class="block text-sm font-medium text-text-primary mb-2">Lifestyle Events</label>
+                            <select class="input-field text-sm">
+                                <option>All Periods</option>
+                                <option>Work from Home</option>
+                                <option>Business Travel</option>
+                                <option>Vacation</option>
+                                <option>Diet Changes</option>
+                            </select>
+                        </div>
+
+                        <button class="w-full btn-primary text-sm">Apply Filters</button>
+                        <button class="w-full text-sm text-text-secondary hover:text-primary transition-colors">Reset All</button>
+                    </div>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="card">
+                    <h3 class="text-lg font-semibold text-text-primary mb-4">Quick Stats</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-text-secondary">Total Emissions</span>
+                            <span class="text-sm font-mono font-medium text-text-primary">247.3 kg</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-text-secondary">Daily Average</span>
+                            <span class="text-sm font-mono font-medium text-text-primary">7.1 kg</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-text-secondary">Best Day</span>
+                            <span class="text-sm font-mono font-medium text-secondary">3.2 kg</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-text-secondary">Worst Day</span>
+                            <span class="text-sm font-mono font-medium text-error">12.8 kg</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-text-secondary">Trend</span>
+                            <span class="text-sm font-medium text-secondary flex items-center">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                                </svg>
+                                ↓ 18%
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Center Column: Main Charts -->
+            <div class="lg:col-span-6 space-y-6">
+                <!-- Emissions Trend Chart -->
+                <div class="card">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-text-primary">Emissions Trend</h3>
+                        <div class="flex items-center space-x-2">
+                            <button class="p-2 text-text-secondary hover:text-primary rounded-lg hover:bg-gray-100" title="Download Chart">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                </svg>
+                            </button>
+                            <button class="p-2 text-text-secondary hover:text-primary rounded-lg hover:bg-gray-100" title="Fullscreen">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="h-80">
+                        <canvas id="emissionsTrendChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Category Breakdown Chart -->
+                <div class="card">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-text-primary">Category Breakdown</h3>
+                        <div class="flex space-x-2">
+                            <button id="pie-view" class="px-3 py-1 text-sm bg-primary text-white rounded-lg" onclick="switchChartView('pie')">Pie</button>
+                            <button id="bar-view" class="px-3 py-1 text-sm text-text-secondary hover:bg-gray-100 rounded-lg" onclick="switchChartView('bar')">Bar</button>
+                        </div>
+                    </div>
+                    <div class="h-80">
+                        <canvas id="categoryChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Comparative Analysis -->
+                <div class="card">
+                    <h3 class="text-lg font-semibold text-text-primary mb-4">Comparative Analysis</h3>
+                    <div class="space-y-6">
+                        <!-- vs Previous Period -->
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-sm font-medium text-text-primary">vs Previous Month</span>
+                                <span class="text-sm font-medium text-secondary">↓ 18.2%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-secondary h-2 rounded-full" style="width: 82%"></div>
+                            </div>
+                            <div class="flex justify-between text-xs text-text-secondary mt-1">
+                                <span>247.3 kg (current)</span>
+                                <span>302.1 kg (previous)</span>
+                            </div>
+                        </div>
+
+                        <!-- vs Demographic Average -->
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-sm font-medium text-text-primary">vs Similar Users</span>
+                                <span class="text-sm font-medium text-secondary">↓ 24.5%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-secondary h-2 rounded-full" style="width: 75%"></div>
+                            </div>
+                            <div class="flex justify-between text-xs text-text-secondary mt-1">
+                                <span>247.3 kg (you)</span>
+                                <span>327.8 kg (average)</span>
+                            </div>
+                        </div>
+
+                        <!-- vs Global Target -->
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-sm font-medium text-text-primary">vs Global Target</span>
+                                <span class="text-sm font-medium text-accent">↑ 12.3%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-accent h-2 rounded-full" style="width: 112%"></div>
+                            </div>
+                            <div class="flex justify-between text-xs text-text-secondary mt-1">
+                                <span>247.3 kg (current)</span>
+                                <span>220.0 kg (target)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Insights & Recommendations -->
+            <div class="lg:col-span-3 space-y-6">
+                <!-- Reduction Recommendations -->
+                <div class="card">
+                    <h3 class="text-lg font-semibold text-text-primary mb-4">Top Recommendations</h3>
+                    <div class="space-y-4">
+                        <div class="p-3 bg-secondary-50 rounded-lg border border-secondary-200">
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 bg-secondary-100 rounded-full flex items-center justify-center mr-3 mt-0.5">
+                                    <svg class="w-4 h-4 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-text-primary">Reduce car trips</p>
+                                    <p class="text-xs text-text-secondary mt-1">Potential: -2.1 kg CO₂/day</p>
+                                    <p class="text-xs text-secondary mt-1">High impact, medium effort</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-3 bg-accent-50 rounded-lg border border-accent-200">
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 bg-accent-100 rounded-full flex items-center justify-center mr-3 mt-0.5">
+                                    <svg class="w-4 h-4 text-accent-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-text-primary">Plant-based meals</p>
+                                    <p class="text-xs text-text-secondary mt-1">Potential: -1.3 kg CO₂/day</p>
+                                    <p class="text-xs text-accent mt-1">Medium impact, low effort</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-3 bg-primary-50 rounded-lg border border-primary-200">
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center mr-3 mt-0.5">
+                                    <svg class="w-4 h-4 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-text-primary">LED light upgrade</p>
+                                    <p class="text-xs text-text-secondary mt-1">Potential: -0.8 kg CO₂/day</p>
+                                    <p class="text-xs text-primary mt-1">Low impact, low effort</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="w-full mt-4 text-sm text-primary hover:underline">View All Recommendations</button>
+                </div>
+
+                <!-- Scenario Planning -->
+                <div class="card">
+                    <h3 class="text-lg font-semibold text-text-primary mb-4">Scenario Planning</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-text-primary mb-2">What if you...</label>
+                            <select class="input-field text-sm mb-3">
+                                <option>Switched to electric car</option>
+                                <option>Went vegetarian</option>
+                                <option>Used public transport</option>
+                                <option>Installed solar panels</option>
+                                <option>Reduced shopping by 50%</option>
+                            </select>
+                            <div class="p-3 bg-secondary-50 rounded-lg">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm text-text-secondary">Potential reduction:</span>
+                                    <span class="text-sm font-mono font-medium text-secondary">-3.2 kg/day</span>
+                                </div>
+                                <div class="flex justify-between items-center mt-1">
+                                    <span class="text-sm text-text-secondary">Annual impact:</span>
+                                    <span class="text-sm font-mono font-medium text-secondary">-1,168 kg/year</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="w-full btn-secondary text-sm">Run Scenario</button>
+                    </div>
+                </div>
+
+                <!-- Pattern Insights -->
+                <div class="card">
+                    <h3 class="text-lg font-semibold text-text-primary mb-4">Pattern Insights</h3>
+                    <div class="space-y-3">
+                        <div class="p-3 bg-gray-50 rounded-lg">
+                            <p class="text-sm font-medium text-text-primary">Weekly Pattern</p>
+                            <p class="text-xs text-text-secondary mt-1">Highest emissions on Mondays (work commute)</p>
+                        </div>
+                        <div class="p-3 bg-gray-50 rounded-lg">
+                            <p class="text-sm font-medium text-text-primary">Seasonal Trend</p>
+                            <p class="text-xs text-text-secondary mt-1">20% higher in winter months (heating)</p>
+                        </div>
+                        <div class="p-3 bg-gray-50 rounded-lg">
+                            <p class="text-sm font-medium text-text-primary">Weather Impact</p>
+                            <p class="text-xs text-text-secondary mt-1">Rainy days increase car usage by 35%</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Export -->
+                <div class="card">
+                    <h3 class="text-lg font-semibold text-text-primary mb-4">Export Data</h3>
+                    <div class="space-y-3">
+                        <button class="w-full flex items-center justify-center px-4 py-2 border border-border rounded-lg hover:bg-gray-50 transition-colors">
+                            <svg class="w-4 h-4 mr-2 text-error" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                            </svg>
+                            <span class="text-sm text-text-primary">Download PDF Report</span>
+                        </button>
+                        <button class="w-full flex items-center justify-center px-4 py-2 border border-border rounded-lg hover:bg-gray-50 transition-colors">
+                            <svg class="w-4 h-4 mr-2 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                            </svg>
+                            <span class="text-sm text-text-primary">Export CSV Data</span>
+                        </button>
+                        <button class="w-full flex items-center justify-center px-4 py-2 border border-border rounded-lg hover:bg-gray-50 transition-colors">
+                            <svg class="w-4 h-4 mr-2 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"/>
+                            </svg>
+                            <span class="text-sm text-text-primary">Share Analysis</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentTimeframe = 'daily';
+        let currentChartView = 'pie';
+        let emissionsTrendChart, categoryChart;
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Switch timeframe
+        function switchTimeframe(timeframe) {
+            currentTimeframe = timeframe;
+            
+            // Update button states
+            document.querySelectorAll('[id$="-btn"]').forEach(btn => {
+                btn.className = 'px-4 py-2 text-sm font-medium rounded-lg text-text-secondary hover:bg-gray-100 transition-colors';
+            });
+            document.getElementById(timeframe + '-btn').className = 'px-4 py-2 text-sm font-medium rounded-lg bg-primary text-white transition-colors';
+            
+            // Update charts with new data
+            updateEmissionsTrendChart();
+        }
+
+        // Switch chart view
+        function switchChartView(view) {
+            currentChartView = view;
+            
+            // Update button states
+            document.getElementById('pie-view').className = view === 'pie' ? 
+                'px-3 py-1 text-sm bg-primary text-white rounded-lg' : 
+                'px-3 py-1 text-sm text-text-secondary hover:bg-gray-100 rounded-lg';
+            document.getElementById('bar-view').className = view === 'bar' ? 
+                'px-3 py-1 text-sm bg-primary text-white rounded-lg' : 
+                'px-3 py-1 text-sm text-text-secondary hover:bg-gray-100 rounded-lg';
+            
+            // Update category chart
+            updateCategoryChart();
+        }
+
+        // Initialize charts
+        function initializeCharts() {
+            // Emissions Trend Chart
+            const trendCtx = document.getElementById('emissionsTrendChart').getContext('2d');
+            emissionsTrendChart = new Chart(trendCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Jul 28', 'Jul 29', 'Jul 30', 'Jul 31', 'Aug 1', 'Aug 2', 'Aug 3', 'Aug 4'],
+                    datasets: [
+                        {
+                            label: 'Total Emissions',
+                            data: [8.2, 6.5, 7.1, 5.8, 6.9, 7.3, 6.1, 5.4],
+                            borderColor: '#2563EB',
+                            backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                            borderWidth: 3,
+                            fill: true,
+                            tension: 0.4,
+                            pointBackgroundColor: '#2563EB',
+                            pointBorderColor: '#ffffff',
+                            pointBorderWidth: 2,
+                            pointRadius: 5
+                        },
+                        {
+                            label: 'Transportation',
+                            data: [4.1, 3.2, 3.6, 2.9, 3.4, 3.7, 3.1, 2.7],
+                            borderColor: '#059669',
+                            backgroundColor: 'rgba(5, 150, 105, 0.1)',
+                            borderWidth: 2,
+                            fill: false,
+                            tension: 0.4,
+                            pointRadius: 3
+                        },
+                        {
+                            label: 'Energy',
+                            data: [2.1, 1.8, 2.0, 1.7, 1.9, 2.1, 1.8, 1.6],
+                            borderColor: '#F59E0B',
+                            backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                            borderWidth: 2,
+                            fill: false,
+                            tension: 0.4,
+                            pointRadius: 3
+                        },
+                        {
+                            label: 'Food',
+                            data: [1.5, 1.2, 1.3, 1.0, 1.4, 1.3, 1.0, 0.9],
+                            borderColor: '#EF4444',
+                            backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                            borderWidth: 2,
+                            fill: false,
+                            tension: 0.4,
+                            pointRadius: 3
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                usePointStyle: true,
+                                padding: 20
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: '#6B7280'
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: '#F3F4F6'
+                            },
+                            ticks: {
+                                color: '#6B7280',
+                                callback: function(value) {
+                                    return value + ' kg';
+                                }
+                            }
+                        }
+                    },
+                    interaction: {
+                        intersect: false,
+                        mode: 'index'
+                    }
+                }
+            });
+
+            // Category Chart
+            const categoryCtx = document.getElementById('categoryChart').getContext('2d');
+            categoryChart = new Chart(categoryCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Transportation', 'Energy', 'Food', 'Shopping'],
+                    datasets: [{
+                        data: [45, 25, 20, 10],
+                        backgroundColor: [
+                            '#2563EB',
+                            '#059669',
+                            '#F59E0B',
+                            '#6B7280'
+                        ],
+                        borderWidth: 0,
+                        cutout: '60%'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                usePointStyle: true,
+                                padding: 20
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Update emissions trend chart based on timeframe
+        function updateEmissionsTrendChart() {
+            const data = {
+                daily: {
+                    labels: ['Jul 28', 'Jul 29', 'Jul 30', 'Jul 31', 'Aug 1', 'Aug 2', 'Aug 3', 'Aug 4'],
+                    datasets: [
+                        [8.2, 6.5, 7.1, 5.8, 6.9, 7.3, 6.1, 5.4],
+                        [4.1, 3.2, 3.6, 2.9, 3.4, 3.7, 3.1, 2.7],
+                        [2.1, 1.8, 2.0, 1.7, 1.9, 2.1, 1.8, 1.6],
+                        [1.5, 1.2, 1.3, 1.0, 1.4, 1.3, 1.0, 0.9]
+                    ]
+                },
+                weekly: {
+                    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                    datasets: [
+                        [52.3, 48.7, 45.2, 42.1],
+                        [26.1, 24.4, 22.6, 21.0],
+                        [14.7, 13.8, 12.9, 12.1],
+                        [8.9, 8.2, 7.6, 7.1]
+                    ]
+                },
+                monthly: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+                    datasets: [
+                        [210, 195, 185, 175, 165, 160, 155],
+                        [105, 98, 93, 88, 83, 80, 78],
+                        [58, 54, 51, 49, 46, 44, 43],
+                        [35, 33, 31, 29, 28, 27, 26]
+                    ]
+                },
+                yearly: {
+                    labels: ['2021', '2022', '2023', '2024', '2025'],
+                    datasets: [
+                        [2520, 2340, 2160, 1980, 1800],
+                        [1260, 1170, 1080, 990, 900],
+                        [700, 650, 600, 550, 500],
+                        [420, 390, 360, 330, 300]
+                    ]
+                }
+            };
+
+            const timeframeData = data[currentTimeframe];
+            emissionsTrendChart.data.labels = timeframeData.labels;
+            emissionsTrendChart.data.datasets[0].data = timeframeData.datasets[0];
+            emissionsTrendChart.data.datasets[1].data = timeframeData.datasets[1];
+            emissionsTrendChart.data.datasets[2].data = timeframeData.datasets[2];
+            emissionsTrendChart.data.datasets[3].data = timeframeData.datasets[3];
+            emissionsTrendChart.update();
+        }
+
+        // Update category chart based on view
+        function updateCategoryChart() {
+            if (currentChartView === 'pie') {
+                categoryChart.config.type = 'doughnut';
+                categoryChart.config.options.plugins.legend.position = 'bottom';
+            } else {
+                categoryChart.config.type = 'bar';
+                categoryChart.config.options.plugins.legend.position = 'top';
+                categoryChart.config.options.scales = {
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            color: '#6B7280'
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: '#F3F4F6'
+                        },
+                        ticks: {
+                            color: '#6B7280',
+                            callback: function(value) {
+                                return value + '%';
+                            }
+                        }
+                    }
+                };
+            }
+            categoryChart.update();
+        }
+
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeCharts();
+        });
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>

@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile & Goals - CarbonTracker</title>
+    <link rel="stylesheet" href="../css/main.css" />
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fcarbontrac6420back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.6"></script>
+</head>
+<body class="bg-background min-h-screen">
+    <!-- Navigation Header -->
+    <nav class="bg-surface shadow-sm border-b border-border-light sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <svg class="w-8 h-8 text-secondary mr-3" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2L13.09 8.26L22 9L13.09 9.74L12 16L10.91 9.74L2 9L10.91 8.26L12 2Z"/>
+                        <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                    <span class="text-xl font-bold text-text-primary">CarbonTracker</span>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="dashboard_homepage.html" class="text-text-secondary hover:text-primary transition-colors">Dashboard</a>
+                    <a href="activity_logging_interface.html" class="text-text-secondary hover:text-primary transition-colors">Log Activity</a>
+                    <a href="analytics_deep_dive.html" class="text-text-secondary hover:text-primary transition-colors">Analytics</a>
+                    <a href="activity_history_explorer.html" class="text-text-secondary hover:text-primary transition-colors">History</a>
+                    <a href="community_insights_comparisons.html" class="text-text-secondary hover:text-primary transition-colors">Community</a>
+                    <a href="user_profile_goals_center.html" class="text-primary font-medium border-b-2 border-primary pb-1">Profile</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden p-2 rounded-lg hover:bg-gray-100" onclick="toggleMobileMenu()">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Mobile Navigation -->
+            <div id="mobileMenu" class="md:hidden hidden pb-4">
+                <div class="flex flex-col space-y-2">
+                    <a href="dashboard_homepage.html" class="text-text-secondary hover:text-primary px-3 py-2 rounded-lg hover:bg-gray-50">Dashboard</a>
+                    <a href="activity_logging_interface.html" class="text-text-secondary hover:text-primary px-3 py-2 rounded-lg hover:bg-gray-50">Log Activity</a>
+                    <a href="analytics_deep_dive.html" class="text-text-secondary hover:text-primary px-3 py-2 rounded-lg hover:bg-gray-50">Analytics</a>
+                    <a href="activity_history_explorer.html" class="text-text-secondary hover:text-primary px-3 py-2 rounded-lg hover:bg-gray-50">History</a>
+                    <a href="community_insights_comparisons.html" class="text-text-secondary hover:text-primary px-3 py-2 rounded-lg hover:bg-gray-50">Community</a>
+                    <a href="user_profile_goals_center.html" class="text-primary font-medium px-3 py-2 rounded-lg bg-primary-50">Profile</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Header Section -->
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-text-primary mb-2">Profile & Goals Center</h1>
+            <p class="text-text-secondary">Manage your account, set sustainability goals, and track your environmental impact achievements.</p>
+        </div>
+
+        <!-- Desktop Layout: Two Columns -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <!-- Left Column: Profile & Account -->
+            <div class="lg:col-span-4 space-y-6">
+                <!-- Profile Card -->
+                <div class="card">
+                    <div class="flex items-center mb-6">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Profile Picture" class="w-20 h-20 rounded-full object-cover border-4 border-primary-100" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                            <button class="absolute -bottom-1 -right-1 w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center hover:bg-primary-700 transition-colors">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="ml-4">
+                            <h2 class="text-xl font-semibold text-text-primary">Ankit Anand</h2>
+                            <p class="text-text-secondary">anandak04@gmail.com</p>
+                            <div class="flex items-center mt-1">
+                                <svg class="w-4 h-4 text-text-secondary mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                </svg>
+                                <span class="text-sm text-text-secondary">Delhi, India</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Personal Information Form -->
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-text-primary mb-1">Full Name</label>
+                            <input type="text" value="Ankit Anand" class="input-field" />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-text-primary mb-1">Email Address</label>
+                            <input type="email" value="anandak04@gmail.com" class="input-field" />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-text-primary mb-1">Location</label>
+                            <select class="input-field">
+                                <option>Delhi, INDIA</option>
+                                <option>San Francisco, CA</option>
+                                <option>New York, NY</option>
+                                <option>Los Angeles, CA</option>
+                                <option>Chicago, IL</option>
+                                <option>Austin, TX</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-text-primary mb-1">Household Size</label>
+                            <select class="input-field">
+                                <option>1 person</option>
+                                <option selected>2 people</option>
+                                <option>3 people</option>
+                                <option>4 people</option>
+                                <option>5+ people</option>
+                            </select>
+                        </div>
+                        <button class="btn-primary w-full">Update Profile</button>
+                    </div>
+                </div>
+
+                <!-- Lifestyle Preferences -->
+                <div class="card">
+                    <h3 class="text-lg font-semibold text-text-primary mb-4">Lifestyle Preferences</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-text-primary mb-2">Primary Transportation</label>
+                            <div class="grid grid-cols-2 gap-2">
+                                <button class="p-3 border-2 border-primary bg-primary-50 rounded-lg text-sm font-medium text-primary">Car</button>
+                                <button class="p-3 border-2 border-border hover:border-primary rounded-lg text-sm font-medium text-text-secondary hover:text-primary transition-colors">Public Transit</button>
+                                <button class="p-3 border-2 border-border hover:border-primary rounded-lg text-sm font-medium text-text-secondary hover:text-primary transition-colors">Bike</button>
+                                <button class="p-3 border-2 border-border hover:border-primary rounded-lg text-sm font-medium text-text-secondary hover:text-primary transition-colors">Walking</button>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-text-primary mb-2">Diet Type</label>
+                            <select class="input-field">
+                                <option>Omnivore</option>
+                                <option selected>Flexitarian</option>
+                                <option>Vegetarian</option>
+                                <option>Vegan</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-text-primary mb-2">Home Type</label>
+                            <select class="input-field">
+                                <option selected>Apartment</option>
+                                <option>House</option>
+                                <option>Condo</option>
+                                <option>Townhouse</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Account Security -->
+                <div class="card">
+                    <h3 class="text-lg font-semibold text-text-primary mb-4">Account Security</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                            <div>
+                                <p class="text-sm font-medium text-text-primary">Password</p>
+                                <p class="text-xs text-text-secondary">Last updated 3 months ago</p>
+                            </div>
+                            <button class="text-primary text-sm hover:underline">Change</button>
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                            <div>
+                                <p class="text-sm font-medium text-text-primary">Two-Factor Authentication</p>
+                                <p class="text-xs text-text-secondary">Not enabled</p>
+                            </div>
+                            <button class="text-primary text-sm hover:underline">Enable</button>
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                            <div>
+                                <p class="text-sm font-medium text-text-primary">Data Export</p>
+                                <p class="text-xs text-text-secondary">Download your data</p>
+                            </div>
+                            <button class="text-primary text-sm hover:underline">Export</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Goals & Achievements -->
+            <div class="lg:col-span-8 space-y-6">
+                <!-- Personal Impact Statistics -->
+                <div class="card">
+                    <h3 class="text-lg font-semibold text-text-primary mb-6">Your Environmental Impact</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-secondary-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <svg class="w-8 h-8 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                                </svg>
+                            </div>
+                            <p class="text-2xl font-bold font-mono text-text-primary">142.5</p>
+                            <p class="text-sm text-text-secondary">kg CO₂ Saved</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-accent-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <svg class="w-8 h-8 text-accent-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+                                </svg>
+                            </div>
+                            <p class="text-2xl font-bold font-mono text-text-primary">23</p>
+                            <p class="text-sm text-text-secondary">Trees Equivalent</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                                </svg>
+                            </div>
+                            <p class="text-2xl font-bold font-mono text-text-primary">#127</p>
+                            <p class="text-sm text-text-secondary">Community Rank</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-secondary-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <svg class="w-8 h-8 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                                </svg>
+                            </div>
+                            <p class="text-2xl font-bold font-mono text-text-primary">47</p>
+                            <p class="text-sm text-text-secondary">Days Streak</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Current Goals -->
+                <div class="card">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-lg font-semibold text-text-primary">Current Goals</h3>
+                        <button class="btn-primary" onclick="openGoalModal()">Add New Goal</button>
+                    </div>
+                    <div class="space-y-4">
+                        <!-- Goal 1 -->
+                        <div class="p-4 border border-border rounded-lg">
+                            <div class="flex items-center justify-between mb-3">
+                                <div>
+                                    <h4 class="font-semibold text-text-primary">Reduce Transport Emissions by 25%</h4>
+                                    <p class="text-sm text-text-secondary">Target: Dec 31, 2025</p>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-lg font-bold font-mono text-secondary">78%</p>
+                                    <p class="text-xs text-text-secondary">Complete</p>
+                                </div>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2 mb-2">
+                                <div class="bg-secondary h-2 rounded-full transition-all duration-300" style="width: 78%"></div>
+                            </div>
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-text-secondary">Started: Jan 1, 2025</span>
+                                <span class="text-secondary font-medium">On track!</span>
+                            </div>
+                        </div>
+
+                        <!-- Goal 2 -->
+                        <div class="p-4 border border-border rounded-lg">
+                            <div class="flex items-center justify-between mb-3">
+                                <div>
+                                    <h4 class="font-semibold text-text-primary">Achieve Net-Zero Weekends</h4>
+                                    <p class="text-sm text-text-secondary">Target: Every weekend</p>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-lg font-bold font-mono text-accent">45%</p>
+                                    <p class="text-xs text-text-secondary">Complete</p>
+                                </div>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2 mb-2">
+                                <div class="bg-accent h-2 rounded-full transition-all duration-300" style="width: 45%"></div>
+                            </div>
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-text-secondary">6 of 13 weekends achieved</span>
+                                <span class="text-accent font-medium">Keep going!</span>
+                            </div>
+                        </div>
+
+                        <!-- Goal 3 -->
+                        <div class="p-4 border border-border rounded-lg">
+                            <div class="flex items-center justify-between mb-3">
+                                <div>
+                                    <h4 class="font-semibold text-text-primary">Plant-Based Meals 3x/Week</h4>
+                                    <p class="text-sm text-text-secondary">Target: Ongoing</p>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-lg font-bold font-mono text-primary">92%</p>
+                                    <p class="text-xs text-text-secondary">Complete</p>
+                                </div>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2 mb-2">
+                                <div class="bg-primary h-2 rounded-full transition-all duration-300" style="width: 92%"></div>
+                            </div>
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-text-secondary">11 of 12 meals this week</span>
+                                <span class="text-primary font-medium">Excellent!</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Achievements -->
+                <div class="card">
+                    <h3 class="text-lg font-semibold text-text-primary mb-6">Recent Achievements</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="text-center p-4 bg-secondary-50 rounded-lg border border-secondary-200">
+                            <div class="w-16 h-16 bg-secondary-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <svg class="w-8 h-8 text-secondary-600" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                </svg>
+                            </div>
+                            <h4 class="font-semibold text-text-primary mb-1">Carbon Crusher</h4>
+                            <p class="text-sm text-text-secondary mb-2">Reduced emissions by 20%</p>
+                            <span class="text-xs bg-secondary-100 text-secondary-700 px-2 py-1 rounded-full">March 15, 2025</span>
+                        </div>
+                        <div class="text-center p-4 bg-accent-50 rounded-lg border border-accent-200">
+                            <div class="w-16 h-16 bg-accent-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <svg class="w-8 h-8 text-accent-600" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                </svg>
+                            </div>
+                            <h4 class="font-semibold text-text-primary mb-1">Streak Master</h4>
+                            <p class="text-sm text-text-secondary mb-2">30 days of logging</p>
+                            <span class="text-xs bg-accent-100 text-accent-700 px-2 py-1 rounded-full">March 10, 2025</span>
+                        </div>
+                        <div class="text-center p-4 bg-primary-50 rounded-lg border border-primary-200">
+                            <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <svg class="w-8 h-8 text-primary-600" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                </svg>
+                            </div>
+                            <h4 class="font-semibold text-text-primary mb-1">Green Commuter</h4>
+                            <p class="text-sm text-text-secondary mb-2">Week of bike commuting</p>
+                            <span class="text-xs bg-primary-100 text-primary-700 px-2 py-1 rounded-full">March 5, 2025</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Settings & Preferences -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Notifications -->
+                    <div class="card">
+                        <h3 class="text-lg font-semibold text-text-primary mb-4">Notifications</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-sm font-medium text-text-primary">Daily Reminders</p>
+                                    <p class="text-xs text-text-secondary">Log your activities</p>
+                                </div>
+                                <button class="relative inline-flex h-6 w-11 items-center rounded-full bg-primary transition-colors">
+                                    <span class="inline-block h-4 w-4 transform rounded-full bg-white transition translate-x-6"></span>
+                                </button>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-sm font-medium text-text-primary">Goal Progress</p>
+                                    <p class="text-xs text-text-secondary">Weekly updates</p>
+                                </div>
+                                <button class="relative inline-flex h-6 w-11 items-center rounded-full bg-primary transition-colors">
+                                    <span class="inline-block h-4 w-4 transform rounded-full bg-white transition translate-x-6"></span>
+                                </button>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-sm font-medium text-text-primary">Achievements</p>
+                                    <p class="text-xs text-text-secondary">Milestone celebrations</p>
+                                </div>
+                                <button class="relative inline-flex h-6 w-11 items-center rounded-full bg-gray-200 transition-colors">
+                                    <span class="inline-block h-4 w-4 transform rounded-full bg-white transition translate-x-1"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Privacy & Sharing -->
+                    <div class="card">
+                        <h3 class="text-lg font-semibold text-text-primary mb-4">Privacy & Sharing</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-sm font-medium text-text-primary">Community Comparisons</p>
+                                    <p class="text-xs text-text-secondary">Anonymous benchmarking</p>
+                                </div>
+                                <button class="relative inline-flex h-6 w-11 items-center rounded-full bg-primary transition-colors">
+                                    <span class="inline-block h-4 w-4 transform rounded-full bg-white transition translate-x-6"></span>
+                                </button>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-sm font-medium text-text-primary">Social Sharing</p>
+                                    <p class="text-xs text-text-secondary">Achievement posts</p>
+                                </div>
+                                <button class="relative inline-flex h-6 w-11 items-center rounded-full bg-primary transition-colors">
+                                    <span class="inline-block h-4 w-4 transform rounded-full bg-white transition translate-x-6"></span>
+                                </button>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-sm font-medium text-text-primary">Data Analytics</p>
+                                    <p class="text-xs text-text-secondary">Usage insights</p>
+                                </div>
+                                <button class="relative inline-flex h-6 w-11 items-center rounded-full bg-gray-200 transition-colors">
+                                    <span class="inline-block h-4 w-4 transform rounded-full bg-white transition translate-x-1"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Integration Settings -->
+                <div class="card">
+                    <h3 class="text-lg font-semibold text-text-primary mb-4">App Integrations</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="flex items-center justify-between p-4 border border-border rounded-lg">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center mr-3">
+                                    <svg class="w-6 h-6 text-red-600" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-text-primary">Fitness Tracker</p>
+                                    <p class="text-xs text-text-secondary">Auto-log transportation</p>
+                                </div>
+                            </div>
+                            <button class="text-primary text-sm hover:underline">Connect</button>
+                        </div>
+                        <div class="flex items-center justify-between p-4 border border-border rounded-lg">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+                                    <svg class="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-text-primary">Smart Home</p>
+                                    <p class="text-xs text-text-secondary">Energy usage tracking</p>
+                                </div>
+                            </div>
+                            <span class="text-xs bg-secondary-100 text-secondary-700 px-2 py-1 rounded-full">Connected</span>
+                        </div>
+                        <div class="flex items-center justify-between p-4 border border-border rounded-lg">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center mr-3">
+                                    <svg class="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.22.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-text-primary">Ride Share Apps</p>
+                                    <p class="text-xs text-text-secondary">Trip logging</p>
+                                </div>
+                            </div>
+                            <button class="text-primary text-sm hover:underline">Connect</button>
+                        </div>
+                        <div class="flex items-center justify-between p-4 border border-border rounded-lg">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center mr-3">
+                                    <svg class="w-6 h-6 text-purple-600" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M7 18c-1.1 0-2-.9-2-2V8c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2v8c0 1.1-.9 2-2 2H7zm0-10v8h10V8H7zm2 2h6v2H9v-2zm0 3h4v2H9v-2z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-text-primary">Banking Apps</p>
+                                    <p class="text-xs text-text-secondary">Purchase categorization</p>
+                                </div>
+                            </div>
+                            <button class="text-primary text-sm hover:underline">Connect</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Goal Creation Modal -->
+    <div id="goalModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
+        <div class="bg-surface rounded-lg shadow-lg max-w-md w-full max-h-screen overflow-y-auto">
+            <div class="p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-semibold text-text-primary">Create New Goal</h3>
+                    <button onclick="closeGoalModal()" class="text-text-secondary hover:text-text-primary">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+                
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-text-primary mb-2">Goal Type</label>
+                        <select class="input-field">
+                            <option>Reduce Transport Emissions</option>
+                            <option>Lower Energy Usage</option>
+                            <option>Sustainable Food Choices</option>
+                            <option>Minimize Shopping Impact</option>
+                            <option>Custom Goal</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-text-primary mb-2">Target Reduction</label>
+                        <div class="flex items-center space-x-2">
+                            <input type="number" placeholder="25" class="input-field flex-1" />
+                            <span class="text-text-secondary">%</span>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-text-primary mb-2">Timeline</label>
+                        <select class="input-field">
+                            <option>1 Month</option>
+                            <option>3 Months</option>
+                            <option>6 Months</option>
+                            <option>1 Year</option>
+                            <option>Custom</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-text-primary mb-2">Description (Optional)</label>
+                        <textarea class="input-field h-20" placeholder="Add details about your goal..."></textarea>
+                    </div>
+                    
+                    <div class="flex space-x-3 pt-4">
+                        <button onclick="closeGoalModal()" class="flex-1 px-4 py-2 border border-border rounded-lg text-text-secondary hover:bg-gray-50 transition-colors">Cancel</button>
+                        <button class="flex-1 btn-primary">Create Goal</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Goal modal functions
+        function openGoalModal() {
+            document.getElementById('goalModal').classList.remove('hidden');
+        }
+
+        function closeGoalModal() {
+            document.getElementById('goalModal').classList.add('hidden');
+        }
+
+        // Toggle switches
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggles = document.querySelectorAll('button[class*="inline-flex h-6 w-11"]');
+            toggles.forEach(toggle => {
+                toggle.addEventListener('click', function() {
+                    const isActive = this.classList.contains('bg-primary');
+                    const span = this.querySelector('span');
+                    
+                    if (isActive) {
+                        this.classList.remove('bg-primary');
+                        this.classList.add('bg-gray-200');
+                        span.classList.remove('translate-x-6');
+                        span.classList.add('translate-x-1');
+                    } else {
+                        this.classList.remove('bg-gray-200');
+                        this.classList.add('bg-primary');
+                        span.classList.remove('translate-x-1');
+                        span.classList.add('translate-x-6');
+                    }
+                });
+            });
+        });
+
+        // Animate progress bars on load
+        window.addEventListener('load', function() {
+            const progressBars = document.querySelectorAll('[style*="width:"]');
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.transition = 'width 1s ease-out';
+                    bar.style.width = width;
+                }, 500);
+            });
+        });
+
+        // Close modal when clicking outside
+        document.getElementById('goalModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeGoalModal();
+            }
+        });
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>
