@@ -20,16 +20,10 @@ A modern HTML project utilizing Tailwind CSS for building responsive web applica
 1. Install dependencies:
 ```bash
 npm install
-# or
-yarn install
-```
 
 2. Start the development server:
 ```bash
 npm run dev
-# or
-yarn dev
-```
 
 ## 📁 Project Structure
 
@@ -74,9 +68,3 @@ The app is built with responsive design using Tailwind CSS breakpoints:
 - `xl`: 1280px and up
 - `2xl`: 1536px and up
 
-## 🙏 Acknowledgments
-
-- Built with [Rocket.new](https://rocket.new)
-- Powered by HTML and Tailwind CSS
-
-Built with ❤️ on Rocket.new
